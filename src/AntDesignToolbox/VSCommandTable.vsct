@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
+  <Include href="VSGlobals.vsct"/>
+
+  <Commands package="AntDesignToolbox">
+	  <Groups>
+		  <Group guid="AntDesignToolbox" id="AntDesignMenuGroup" priority="0x0001">
+			  <Parent guid="AntDesignToolbox" id="AntDesignMenu"/>
+		  </Group>
+	  </Groups>
+
+	  <Menus>
+		  <Menu guid="AntDesignToolbox" id="AntDesignMenu" priority="0x0001">
+			  <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+			  <Strings>
+				  <ButtonText>Ant Design Blazor</ButtonText>
+			  </Strings>
+		  </Menu>
+	  </Menus>
+    <!--This section defines the elements the user can interact with, like a menu command or a button or combo box in a toolbar. -->
+    <Buttons>
+      <Button guid="AntDesignToolbox" id="ControlToolboxCommand" priority="0x0100" type="Button">
+        <Parent guid="AntDesignToolbox" id="AntDesignMenuGroup"/>
+        <Icon guid="ImageCatalogGuid" id="ToolWindow" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>My Tool Window</ButtonText>
+          <LocCanonicalName>.View.MyToolWindow</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="AntDesignToolbox" value="{ebd88e56-07f7-48b1-b706-49ce325a3002}">
+      <IDSymbol name="ControlToolboxCommand" value="0x0100" />
+		<IDSymbol name="AntDesignMenu" value="0x0001"/>
+		<IDSymbol name="AntDesignMenuGroup" value="0x0002"/>
+    </GuidSymbol>
+	  <GuidSymbol name="UIContextGuid" value="{1DD34C08-D30D-48D1-8D32-78E944FDB2D1}">
+		  
+	  </GuidSymbol>
+  </Symbols>
+</CommandTable>
