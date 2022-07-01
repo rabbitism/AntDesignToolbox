@@ -8,32 +8,34 @@
              xmlns:theming="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Imaging"
              xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
              xmlns:util="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Utilities"
+             xmlns:views="clr-namespace:AntDesignToolbox.ToolWindows.Views"
+             xmlns:vm="clr-namespace:AntDesignToolbox.ToolWindows.ViewModels"
              Name="MyToolWindow"
+             d:DataContext="{d:DesignInstance Type={x:Type vm:ControlToolboxViewModel}}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              toolkit:Themes.UseVsTheme="True"
              mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" MaxHeight="300" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical">
-            <TextBox />
-            <Label x:Name="lblHeadline"
-                   Margin="10"
-                   HorizontalAlignment="Center"
-                   MouseMove="button1_MouseMove">
-                Title
-            </Label>
-            <Button Name="button1"
-                    Width="120"
-                    Height="80"
-                    Click="button1_Click"
-                    Content="Click me!" />
-        </StackPanel>
-        <ScrollViewer Grid.Row="1">
-            <ContentControl />
+        <TextBox />
+        <ListView Grid.Row="1" ItemsSource="{Binding TreeItems}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding ControlName}" MouseMove="Label_MouseMove" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ScrollViewer Grid.Row="2">
+            <ContentControl>
+                <Border>
+                    <Label MouseMove="Label_MouseMove">This is Sample Drag Area</Label>
+                </Border>
+            </ContentControl>
         </ScrollViewer>
 
     </Grid>

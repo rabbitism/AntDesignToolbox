@@ -10,13 +10,6 @@ namespace AntDesignToolbox
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
-    [ProvideUIContextRule(PackageGuids.UIContextGuidString, 
-        name: "Test auto load",
-        expression: "DotRazor",
-        termNames: new[] { "DotRazor" },
-        termValues: new[] { "HierSingleSelectionName:.razor$" }
-        )]
-    [ProvideToolWindowVisibility(typeof(ControlToolboxWindow.Pane), VSConstants.UICONTEXT.CSharpProject_string)]
     [ProvideToolWindow(typeof(ControlToolboxWindow.Pane), Style = VsDockStyle.Tabbed, Window = WindowGuids.Toolbox)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.AntDesignToolboxString)]
