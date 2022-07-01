@@ -14,7 +14,12 @@
              toolkit:Themes.UseVsTheme="True"
              mc:Ignorable="d">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" MaxHeight="300" />
+        </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
+            <TextBox />
             <Label x:Name="lblHeadline"
                    Margin="10"
                    HorizontalAlignment="Center"
@@ -27,5 +32,9 @@
                     Click="button1_Click"
                     Content="Click me!" />
         </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <ContentControl />
+        </ScrollViewer>
+
     </Grid>
 </UserControl>
