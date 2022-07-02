@@ -40,7 +40,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             };
 
 
-            DocumentView view = null;
+            
             
         }
 

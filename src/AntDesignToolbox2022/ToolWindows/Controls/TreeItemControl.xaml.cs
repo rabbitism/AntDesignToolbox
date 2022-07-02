@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AntDesignToolbox.ToolWindows.Views
+namespace AntDesignToolbox.ToolWindows.Controls
 {
     /// <summary>
     /// Interaction logic for TreeItemControl.xaml

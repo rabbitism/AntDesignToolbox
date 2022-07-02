@@ -2,6 +2,8 @@
 global using Microsoft.VisualStudio.Shell;
 global using System;
 global using Task = System.Threading.Tasks.Task;
+using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -15,12 +17,15 @@ namespace AntDesignToolbox
     [Guid(PackageGuids.AntDesignToolboxString)]
     public sealed class AntDesignToolboxPackage : ToolkitPackage
     {
-        
+        public DTE2 DTE { get; private set; }
+
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+            DTE = (DTE2)await GetServiceAsync(typeof(DTE));
             await this.RegisterCommandsAsync();
-
             this.RegisterToolWindows();
+
         }
+
     }
 }

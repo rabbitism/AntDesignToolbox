@@ -35,7 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CreateVsixContainer>False</CreateVsixContainer>
+    <CreateVsixContainer>True</CreateVsixContainer>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,6 +44,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DeployExtension>True</DeployExtension>
+    <CopyVsixExtensionFiles>False</CopyVsixExtensionFiles>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AntDesignToolboxPackage.cs" />
@@ -60,7 +62,7 @@
     <Compile Include="ToolWindows\ControlToolboxWindow.cs" />
     <Compile Include="ToolWindows\ViewModels\ControlToolboxViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\TreeItemViewModel.cs" />
-    <Compile Include="ToolWindows\Views\TreeItemControl.xaml.cs">
+    <Compile Include="ToolWindows\Controls\TreeItemControl.xaml.cs">
       <DependentUpon>TreeItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="VSCommandTable.cs">
@@ -123,7 +125,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ToolWindows\Views\TreeItemControl.xaml">
+    <Page Include="ToolWindows\Controls\TreeItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

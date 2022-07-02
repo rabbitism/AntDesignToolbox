@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AntDesignToolbox.ControlToolboxControl"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:catalog="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.ImageCatalog"
@@ -8,9 +8,10 @@
              xmlns:theming="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Imaging"
              xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
              xmlns:util="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Utilities"
-             xmlns:views="clr-namespace:AntDesignToolbox.ToolWindows.Views"
+             xmlns:views="clr-namespace:AntDesignToolbox.ToolWindows.Controls"
              xmlns:vm="clr-namespace:AntDesignToolbox.ToolWindows.ViewModels"
-             Name="MyToolWindow"
+             xmlns:local="clr-namespace:AntDesignToolbox" x:Class="AntDesignToolbox.ControlToolboxControl"
+             x:Name="MyToolWindow"
              d:DataContext="{d:DesignInstance Type={x:Type vm:ControlToolboxViewModel}}"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -33,10 +34,12 @@
         <ScrollViewer Grid.Row="2">
             <ContentControl>
                 <Border>
-                    <Label MouseMove="Label_MouseMove">This is Sample Drag Area</Label>
+                    <Label MouseMove="Label_MouseMove" Content="This is Sample Drag Area"/>
                 </Border>
             </ContentControl>
         </ScrollViewer>
+
+        <local:ControlToolboxControl/>
 
     </Grid>
 </UserControl>

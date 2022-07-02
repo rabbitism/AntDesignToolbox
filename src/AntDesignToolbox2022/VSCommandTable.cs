@@ -14,9 +14,6 @@ namespace AntDesignToolbox
     {
         public const string AntDesignToolboxString = "ebd88e56-07f7-48b1-b706-49ce325a3002";
         public static Guid AntDesignToolbox = new Guid(AntDesignToolboxString);
-
-        public const string UIContextGuidString = "1dd34c08-d30d-48d1-8d32-78e944fdb2d1";
-        public static Guid UIContextGuid = new Guid(UIContextGuidString);
     }
     /// <summary>
     /// Helper class that encapsulates all CommandIDs uses across VS Package.
