@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Components>
+	<Component ComponentName="Button" MonikerName="Button" >
+		<DefaultMarkup>
+			<![CDATA[<Button Type=""@ButtonType.Primary"">Primary</Button>]]>
+		</DefaultMarkup>
+		<Properties>
+			<OptionsProperty PropertyName="Type" Description="" IgnoreOnDefault="True">
+				<DefaultValue><![CDATA[@ButtonType.Primary]]></DefaultValue>
+				<Options>
+					<Option DisplayName="Primary"><![CDATA[@ButtonType.Primary]]></Option>
+					<Option DisplayName="Default"><![CDATA[@ButtonType.Default]]></Option>
+					<Option DisplayName="Dashed"><![CDATA[@ButtonType.Dashed]]></Option>
+					<Option DisplayName="Text"><![CDATA[@ButtonType.Text]]></Option>
+					<Option DisplayName="Link"><![CDATA[@ButtonType.Link]]></Option>
+				</Options>
+			</OptionsProperty>
+			<OptionsProperty PropertyName="Size" Description="" IgnoreOnDefault="True">
+				<DefaultValue><![CDATA[@ButtonSize.Default]]></DefaultValue>
+				<Options>
+					<Option DisplayName="Primary"><![CDATA[@ButtonSize.Large]]></Option>
+					<Option DisplayName="Default"><![CDATA[@ButtonSize.Default]]></Option>
+					<Option DisplayName="Dashed"><![CDATA[@ButtonSize.Small]]></Option>
+				</Options>
+			</OptionsProperty>
+			<BooleanProperty PropertyName="Danger" Description="" IgnoreOnDefault="True" DefaultValue="False">
+				
+			</BooleanProperty>
+		</Properties>
+	</Component>
+</Components>

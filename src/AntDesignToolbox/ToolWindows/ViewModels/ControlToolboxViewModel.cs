@@ -40,7 +40,11 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                     DefaultMarkup = @"<Button Type=""@ButtonType.Primary"">Primary</Button>",
                     Moniker = KnownMonikers.Button,
                     Properties = new ObservableCollection<PropertyItemViewModel>(){
-                        new OptionsPropertyViewModel(){ PropertyName = "Type", DefaultValue="@ButtonType.Primary", SelectedValue = "@ButtonType.Primary", Options= new ObservableCollection<string>{ "@ButtonType.Primary", "@ButtonType.Link", "@ButtonType.Default"} },
+                        new OptionsPropertyViewModel(){ 
+                            PropertyName = "Type", 
+                            DefaultValue="@ButtonType.Primary", 
+                            SelectedValue = "@ButtonType.Primary", 
+                            Options= new ObservableCollection<string>{ "@ButtonType.Primary", "@ButtonType.Link", "@ButtonType.Default"} },
                         new StringPropertyViewModel(){ PropertyName = "Content", DefaultValue = "", Value = ""},
                         new BooleanPropertyViewModel(){ PropertyName = "Danger", DefaultValue = false, Value = false }
                     }

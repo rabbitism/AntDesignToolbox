@@ -28,7 +28,7 @@
 				<Icon guid="ImageCatalogGuid" id="ToolWindow" />
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<Strings>
-					<ButtonText>My Tool Window</ButtonText>
+					<ButtonText>Ant Design Gallary</ButtonText>
 					<LocCanonicalName>.View.MyToolWindow</LocCanonicalName>
 				</Strings>
 			</Button>

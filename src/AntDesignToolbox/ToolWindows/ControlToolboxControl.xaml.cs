@@ -11,6 +11,7 @@ using EnvDTE80;
 using System.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using System.Xml.Linq;
+using AntDesignToolbox.ToolWindows.Controls;
 
 namespace AntDesignToolbox
 {
@@ -27,14 +28,13 @@ namespace AntDesignToolbox
         {
             if(e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                if (sender is Label l)
+                if (sender is ComponentTreeItemControl l)
                 {
                     try
                     {
-                        var parent = VisualTreeHelper.GetParent(l) as StackPanel;
-                        if(parent != null && parent.DataContext is TreeItemViewModel v)
+                        if(l.DataContext is TreeItemViewModel v)
                         {
-                            DragDrop.DoDragDrop(parent, v.DefaultMarkup, DragDropEffects.Copy);
+                            DragDrop.DoDragDrop(l, v.DefaultMarkup, DragDropEffects.Copy);
                         }
                     }catch(Exception ex)
                     {

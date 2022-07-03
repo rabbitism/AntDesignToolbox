@@ -21,76 +21,78 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" MaxHeight="300" />
-            <RowDefinition Height="auto" MaxHeight="300" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" MinHeight="100" />
         </Grid.RowDefinitions>
         <TextBox Padding="4,2" />
         <ListView Grid.Row="1"
                   ItemsSource="{Binding TreeItems}"
                   SelectedItem="{Binding SelectedItem}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <imaging:CrispImage MinWidth="16"
-                                            MinHeight="16"
-                                            Margin="0,0,5,0"
-                                            Moniker="{Binding Moniker, IsAsync=True}" />
-                        <Label Content="{Binding ControlName}" MouseLeave="Label_MouseMove" />
-                    </StackPanel>
+                    <views:ComponentTreeItemControl HorizontalAlignment="Stretch"
+                                                    ComponentName="{Binding ControlName}"
+                                                    DataContext="{Binding}"
+                                                    Moniker="{Binding Moniker}"
+                                                    MouseLeave="Label_MouseMove" />
 
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ScrollViewer Grid.Row="2"
+        <GridSplitter Grid.Row="2"
+                      Height="5"
                       HorizontalAlignment="Stretch"
-                      HorizontalContentAlignment="Stretch">
-            <ContentControl>
-                <Border>
-                    <StackPanel Grid.IsSharedSizeScope="True">
-                        <StackPanel Margin="0,4,0,8" Orientation="Horizontal">
-                            <Label Padding="4,0,0,0" Content="Properties of " />
-                            <Label Padding="0" Content="{Binding SelectedItem.ControlName}" />
+                      VerticalAlignment="Center"
+                      Background="Transparent"
+                      Foreground="Transparent" />
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   Padding="0"
+                   HorizontalAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Click to Copy or Drag to Razor file"
+                   MouseLeave="Label_MouseMove_1" />
+
+            <ScrollViewer Grid.Row="1"
+                          MinHeight="100"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <ContentControl>
+                    <Border>
+                        <StackPanel Grid.IsSharedSizeScope="True">
+                            <ItemsControl MinHeight="100"
+                                          HorizontalAlignment="Stretch"
+                                          HorizontalContentAlignment="Stretch"
+                                          ItemsSource="{Binding SelectedItem.Properties}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel HorizontalAlignment="Stretch" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.Resources>
+                                    <ResourceDictionary Source="../Styles/OptionItemStyles.xaml" />
+                                </ItemsControl.Resources>
+
+                            </ItemsControl>
+
                         </StackPanel>
-                        <!--<Grid HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"
-                                                  MinWidth="100"
-                                                  SharedSizeGroup="PropertyName" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0"
-                                   Padding="8,0"
-                                   Content="Property" />
-                            <Label Grid.Column="1"
-                                   Padding="8,0"
-                                   Content="Value" />
 
-                        </Grid>-->
-                        <ItemsControl MinHeight="100"
-                                      HorizontalAlignment="Stretch"
-                                      HorizontalContentAlignment="Stretch"
-                                      ItemsSource="{Binding SelectedItem.Properties}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel HorizontalAlignment="Stretch" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.Resources>
-                                <ResourceDictionary Source="../Styles/OptionItemStyles.xaml" />
-                            </ItemsControl.Resources>
+                    </Border>
+                </ContentControl>
+            </ScrollViewer>
 
-                        </ItemsControl>
+        </Grid>
 
-                    </StackPanel>
-
-                </Border>
-            </ContentControl>
-        </ScrollViewer>
-        <Label Grid.Row="3"
-               Padding="0"
-               HorizontalAlignment="Center"
-               HorizontalContentAlignment="Center"
-               Content="Click to Copy or Drag to Razor file"
-               MouseLeave="Label_MouseMove_1" />
     </Grid>
 </UserControl>
