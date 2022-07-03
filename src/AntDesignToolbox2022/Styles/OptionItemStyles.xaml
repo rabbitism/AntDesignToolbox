@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:AntDesignToolbox.ToolWindows.ViewModels">
+
+
+    <DataTemplate DataType="{x:Type vm:StringPropertyViewModel}">
+        <Grid MinHeight="20" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Padding="8,0"
+                   Content="{Binding PropertyName}"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <TextBox Grid.Column="1"
+                     Padding="0"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:BooleanPropertyViewModel}">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Padding="8,0"
+                   Content="{Binding PropertyName}"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <CheckBox Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding Value}" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:OptionsPropertyViewModel}">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Padding="8,0"
+                   Content="{Binding PropertyName}"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <ComboBox Grid.Column="1"
+                      Padding="0"
+                      VerticalContentAlignment="Center"
+                      ItemsSource="{Binding Options}"
+                      SelectedItem="{Binding SelectedValue}" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

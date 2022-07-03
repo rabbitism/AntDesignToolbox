@@ -60,7 +60,13 @@
       <DependentUpon>ControlToolboxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolWindows\ControlToolboxWindow.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\OptionItemViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\BooleanPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ControlToolboxViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyCategory.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\OptionsPropertyViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyItemViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\StringPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\TreeItemViewModel.cs" />
     <Compile Include="ToolWindows\Controls\TreeItemControl.xaml.cs">
       <DependentUpon>TreeItemControl.xaml</DependentUpon>
@@ -95,6 +101,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
@@ -121,6 +128,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\OptionItemStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ToolWindows\ControlToolboxControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,16 +1,16 @@
-﻿<UserControl
+﻿<UserControl x:Class="AntDesignToolbox.ControlToolboxControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:catalog="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.ImageCatalog"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:imaging="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.Imaging"
+             xmlns:local="clr-namespace:AntDesignToolbox"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:theming="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Imaging"
              xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
              xmlns:util="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Utilities"
              xmlns:views="clr-namespace:AntDesignToolbox.ToolWindows.Controls"
              xmlns:vm="clr-namespace:AntDesignToolbox.ToolWindows.ViewModels"
-             xmlns:local="clr-namespace:AntDesignToolbox" x:Class="AntDesignToolbox.ControlToolboxControl"
              x:Name="MyToolWindow"
              d:DataContext="{d:DesignInstance Type={x:Type vm:ControlToolboxViewModel}}"
              d:DesignHeight="300"
@@ -22,24 +22,75 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" MaxHeight="300" />
+            <RowDefinition Height="auto" MaxHeight="300" />
         </Grid.RowDefinitions>
-        <TextBox />
-        <ListView Grid.Row="1" ItemsSource="{Binding TreeItems}">
+        <TextBox Padding="4,2" />
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding TreeItems}"
+                  SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding ControlName}" MouseMove="Label_MouseMove" />
+                    <StackPanel Orientation="Horizontal">
+                        <imaging:CrispImage MinWidth="16"
+                                            MinHeight="16"
+                                            Margin="0,0,5,0"
+                                            Moniker="{Binding Moniker, IsAsync=True}" />
+                        <Label Content="{Binding ControlName}" MouseLeave="Label_MouseMove" />
+                    </StackPanel>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ScrollViewer Grid.Row="2">
+        <ScrollViewer Grid.Row="2"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch">
             <ContentControl>
                 <Border>
-                    <Label MouseMove="Label_MouseMove" Content="This is Sample Drag Area"/>
+                    <StackPanel Grid.IsSharedSizeScope="True">
+                        <StackPanel Margin="0,4,0,8" Orientation="Horizontal">
+                            <Label Padding="4,0,0,0" Content="Properties of " />
+                            <Label Padding="0" Content="{Binding SelectedItem.ControlName}" />
+                        </StackPanel>
+                        <!--<Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"
+                                                  MinWidth="100"
+                                                  SharedSizeGroup="PropertyName" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Padding="8,0"
+                                   Content="Property" />
+                            <Label Grid.Column="1"
+                                   Padding="8,0"
+                                   Content="Value" />
+
+                        </Grid>-->
+                        <ItemsControl MinHeight="100"
+                                      HorizontalAlignment="Stretch"
+                                      HorizontalContentAlignment="Stretch"
+                                      ItemsSource="{Binding SelectedItem.Properties}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel HorizontalAlignment="Stretch" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.Resources>
+                                <ResourceDictionary Source="../Styles/OptionItemStyles.xaml" />
+                            </ItemsControl.Resources>
+
+                        </ItemsControl>
+
+                    </StackPanel>
+
                 </Border>
             </ContentControl>
         </ScrollViewer>
-
-        <local:ControlToolboxControl/>
-
+        <Label Grid.Row="3"
+               Padding="0"
+               HorizontalAlignment="Center"
+               HorizontalContentAlignment="Center"
+               Content="Click to Copy or Drag to Razor file"
+               MouseLeave="Label_MouseMove_1" />
     </Grid>
 </UserControl>

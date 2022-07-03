@@ -8,7 +8,7 @@ namespace AntDesignToolbox
 {
     public class ControlToolboxWindow : BaseToolWindow<ControlToolboxWindow>
     {
-        public override string GetTitle(int toolWindowId) => "My Tool Window";
+        public override string GetTitle(int toolWindowId) => "Ant Design Blazor";
 
         public override Type PaneType => typeof(Pane);
 
