@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntDesignToolbox", "AntDesignToolbox2022\AntDesignToolbox.csproj", "{23FEB5A4-A6D0-492B-91F7-7FDF3E53969C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntDesignToolbox", "AntDesignToolbox\AntDesignToolbox.csproj", "{23FEB5A4-A6D0-492B-91F7-7FDF3E53969C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
