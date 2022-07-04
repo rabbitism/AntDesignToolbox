@@ -34,15 +34,5 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         {
 
         }
-
-        private void OnMouseLeave(object o)
-        {
-            object obj = o;
-            System.Diagnostics.Debug.WriteLine(obj.GetType().Name);
-
-        }
-
-
-
     }
 }

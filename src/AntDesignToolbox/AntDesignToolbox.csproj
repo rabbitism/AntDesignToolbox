@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="AntDesignToolboxPackage.cs" />
     <Compile Include="Commands\ControlToolboxCommand.cs" />
+    <Compile Include="Commons\ViewModelHelper.cs" />
+    <Compile Include="Commons\XmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -69,7 +71,11 @@
       <DependentUpon>ControlToolboxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolWindows\ControlToolboxWindow.cs" />
+    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\BreadcrumbComponentViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\LayoutComponentViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\SpaceComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IntegerPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\OptionItemViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\BooleanPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ControlToolboxViewModel.cs" />
@@ -78,6 +84,7 @@
     <Compile Include="ToolWindows\ViewModels\PropertyItemViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\StringPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\TreeItemViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\ViewModelSourceHelper.cs" />
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

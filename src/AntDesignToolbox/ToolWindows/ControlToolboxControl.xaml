@@ -17,6 +17,9 @@
              d:DesignWidth="300"
              toolkit:Themes.UseVsTheme="True"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/StyleUtilities.xaml" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -55,11 +58,26 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Label Grid.Row="0"
-                   Padding="0"
-                   HorizontalAlignment="Center"
+                   Padding="0,15"
+                   HorizontalAlignment="Stretch"
                    HorizontalContentAlignment="Center"
+                   BorderThickness="1"
                    Content="Click to Copy or Drag to Razor file"
-                   MouseLeave="Label_MouseMove_1" />
+                   MouseLeave="Label_MouseMove_1"
+                   MouseUp="Label_MouseUp">
+                <Label.Style>
+                    <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="BorderBrush" Value="Yellow" />
+                                <!--  This won't work  -->
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Label.Style>
+            </Label>
 
             <ScrollViewer Grid.Row="1"
                           MinHeight="100"

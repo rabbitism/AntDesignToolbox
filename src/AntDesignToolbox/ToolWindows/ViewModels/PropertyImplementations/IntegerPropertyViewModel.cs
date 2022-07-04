@@ -1,18 +1,20 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using Prism.Mvvm;
-using Prism.Commands;
 using System.Xml.Linq;
+using Prism.Commands;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
-	public class StringPropertyViewModel : PropertyItemViewModel
-	{
-        public string DefaultValue { get; set; } 
+    public class IntegerPropertyViewModel : PropertyItemViewModel
+    {
+        public int? DefaultValue { get; set; }
+        private int? _value;
 
-        private string _value;
-        public string Value
+        public int? Value
         {
             get { return _value; }
             set { SetProperty(ref _value, value); }
@@ -20,18 +22,22 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         public override ICommand ResetCommand { get; set; }
 
-        public StringPropertyViewModel()
+        public IntegerPropertyViewModel()
         {
             ResetCommand = new DelegateCommand(() => { Value = DefaultValue; });
         }
 
         public override XAttribute ConvertToAttribute()
         {
-            if(IgnoreOnDefault && DefaultValue== Value)
+            if(IgnoreOnDefault && DefaultValue == Value)
             {
                 return null;
             }
-            return new XAttribute(PropertyName, Value ?? string.Empty);    
+            if(Value == null)
+            {
+                return null;
+            }
+            return new XAttribute(PropertyName, Value);
         }
 
         public override XElement ConvertToElement()

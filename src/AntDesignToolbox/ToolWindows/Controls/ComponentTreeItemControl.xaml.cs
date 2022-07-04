@@ -52,7 +52,7 @@ namespace AntDesignToolbox.ToolWindows.Controls
             {
                 if (this.DataContext != null && this.DataContext is TreeItemViewModel vm)
                 {
-                    DragDrop.DoDragDrop(sender as DependencyObject, vm.Component.DefaultMarkup, DragDropEffects.Copy);
+                    DragDrop.DoDragDrop(sender as DependencyObject, vm.Component.DefaultMarkup+"\n", DragDropEffects.Copy);
                 }
             }
             

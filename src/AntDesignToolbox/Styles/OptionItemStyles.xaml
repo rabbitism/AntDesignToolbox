@@ -32,6 +32,31 @@
                      Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:IntegerPropertyViewModel}">
+        <Grid MinHeight="20" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Content="{Binding PropertyName}"
+                   Style="{StaticResource PropertyNameStyle}"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <TextBox Grid.Column="1"
+                     Padding="{StaticResource DefaultPadding}"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:BooleanPropertyViewModel}">
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>

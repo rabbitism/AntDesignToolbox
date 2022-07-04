@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.Imaging;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
@@ -20,64 +21,46 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             }
         }
 
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                SetProperty(ref _searchText, value);
+
+            }
+        }
+
         #endregion
 
 
         public ControlToolboxViewModel()
         {
-            TreeItems = new ObservableCollection<TreeItemViewModel>()
+            var items = new ObservableCollection<TreeItemViewModel>()
             {
-                new TreeItemViewModel(){
-                    Component = new ComponentViewModel(){
-                        ControlName = "Button",
-                        DefaultMarkup = @"<Button Type=""@ButtonType.Primary"">Primary</Button>",
-                        Moniker = KnownMonikers.Button,
-                        Properties = new ObservableCollection<PropertyItemViewModel>(){
-                            new OptionsPropertyViewModel(){
-                                PropertyName = "Type",
-                                DefaultValue="@ButtonType.Primary",
-                                SelectedValue = "@ButtonType.Primary",
-                                Options= new ObservableCollection<string>{ "@ButtonType.Primary", "@ButtonType.Link", "@ButtonType.Default"} },
-                            new StringPropertyViewModel(){ PropertyName = "Content", DefaultValue = "", Value = ""},
-                            new BooleanPropertyViewModel(){ PropertyName = "Danger", DefaultValue = false, Value = false }
-                        }
-                    }
-                },
-                new TreeItemViewModel(){
-                    Component = new ComponentViewModel()
-                    {
-                        ControlName = "DatePicker", DefaultMarkup = @"<DatePicker TValue=""DateTime?"" Picker=""@DatePickerType.Date"" />", Moniker= KnownMonikers.DateTimePicker
-                    }
-                },
-                new TreeItemViewModel(){ Component = new ComponentViewModel(){
-                    ControlName = "Layout", Moniker = KnownMonikers.LayoutPanel, DefaultMarkup = @"<Layout>
-    <Header>Header</Header>
-    <Layout>
-        <Sider>
-
-        </Sider>
-        <Content>
-
-        </Content>
-    </Layout>
-    <Footer>Footer</Footer>
-</Layout>" } 
-                },
-                new TreeItemViewModel(){ Component = new ComponentViewModel(){
-                    ControlName = "Menu", Moniker = KnownMonikers.MenuItem, DefaultMarkup = @"<Menu>
-    <MenuItem Key=""9"">Option 9</MenuItem>
-    <MenuItem Key=""10"">Option 10</MenuItem>
-    <MenuItem Key=""11"">Option 11</MenuItem>
-    <MenuItem Key=""12"">Option 12</MenuItem>
-</Menu>"}
-                }
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.ButtonViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.TextViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.TitleViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.ParagraphViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.DividerViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.SpaceViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.LayoutViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.BreadcrumbViewModel },
             };
+            TreeItems = new ObservableCollection<TreeItemViewModel>(items.OrderBy(a => a.Component.ControlName));
+            
         }
 
 
         public void DragCompiledComponent(DependencyObject source)
         {
             DragDrop.DoDragDrop(source, null, DragDropEffects.Copy);
+        }
+
+        private void SearchByText()
+        {
+
         }
     }
 }

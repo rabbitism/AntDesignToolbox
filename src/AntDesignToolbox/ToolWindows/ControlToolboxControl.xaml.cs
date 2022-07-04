@@ -25,41 +25,8 @@ namespace AntDesignToolbox
             this.DataContext = new ControlToolboxViewModel();           
         }
 
-        private void DragCompiledComponent(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if(e.LeftButton== System.Windows.Input.MouseButtonState.Pressed && DataContext is ControlToolboxViewModel vm)
-            {
-                vm.DragCompiledComponent(sender as DependencyObject);
-            }
-        }
 
-        private void Label_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if(e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                if (sender is ComponentTreeItemControl l)
-                {
-                    try
-                    {
-                        if(l.DataContext is TreeItemViewModel v)
-                        {
-                            DragDrop.DoDragDrop(l, v.Component.DefaultMarkup, DragDropEffects.Copy);
-                        }
-                    }catch(Exception ex)
-                    {
-                        
-                    }
-                }
-                else
-                {
-                    DragDrop.DoDragDrop((DependencyObject)sender, "Hello World!", DragDropEffects.Copy);
-                }
-            }
-            
-        }
-
-
-        private async void Label_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Label_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if(e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
@@ -68,62 +35,28 @@ namespace AntDesignToolbox
                     System.Diagnostics.Debug.WriteLine("Dragged");
                     if(this.DataContext is ControlToolboxViewModel v && v.SelectedItem!=null)
                     {
-                        XElement element = new XElement(v.SelectedItem.Component.ControlName);
-                        foreach(var property in v.SelectedItem.Component.Properties)
-                        {
-                            if(property is StringPropertyViewModel sp)
-                            {
-                                if(sp.PropertyName == "Content")
-                                {
-                                    element.Add(new XText(sp.Value));
-                                }
-                                else
-                                {
-                                    element.Add(new XAttribute(sp.PropertyName, sp.Value));
-                                }
-                            }
-                            else if(property is BooleanPropertyViewModel bp)
-                            {
-                                element.Add(new XAttribute(bp.PropertyName, bp.Value.ToString().ToLower()));
-                            }
-                            else if(property is OptionsPropertyViewModel op)
-                            {
-                                element.Add(new XAttribute(op.PropertyName, op.SelectedValue));
-                            }
-                        }
 
-                        string s = element.ToString(SaveOptions.None)+"\n";
+                        string s = v.SelectedItem.Component.GetCompiledComponent();
                         DragDrop.DoDragDrop(l, s, DragDropEffects.Copy);
-                        //StringBuilder builder = new StringBuilder();
-                        //builder.AppendLine("Testing----------");
-                        //builder.Append("Control Name: ");
-                        //builder.AppendLine(v.SelectedItem.ControlName);
-                        //foreach(var item in v.SelectedItem.Properties)
-                        //{
-                        //    if(item is StringPropertyViewModel sp)
-                        //    {
-                        //        builder.Append(sp.PropertyName + ": ");
-                        //        builder.AppendLine(sp.Value);
-                        //    }
-                        //    else if(item  is BooleanPropertyViewModel bp)
-                        //    {
-                        //        builder.Append(bp.PropertyName + ": ");
-                        //        builder.AppendLine(bp.Value.ToString());
-                        //    }
-                        //    else if(item is OptionsPropertyViewModel op)
-                        //    {
-                        //        builder.Append(op.PropertyName + ": ");
-                        //        builder.AppendLine(op.SelectedValue);
-                        //    }
-                        //}
-
-                        //builder.AppendLine("Test Finished--------------");
-                        //DragDrop.DoDragDrop(l, builder.ToString(), DragDropEffects.Copy);
                     }
                     
                 }
             }
         }
 
+        private void Label_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is Label)
+            {
+                System.Diagnostics.Debug.WriteLine("Dragged");
+                if (this.DataContext is ControlToolboxViewModel v && v.SelectedItem != null)
+                {
+
+                    string s = v.SelectedItem.Component.GetCompiledComponent();
+                    Clipboard.SetText(s);
+                }
+
+            }
+        }
     }
 }

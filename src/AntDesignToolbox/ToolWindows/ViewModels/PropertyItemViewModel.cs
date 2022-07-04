@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
@@ -26,11 +27,16 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             set { SetProperty(ref _category, value); }
         }
 
-        public bool IgnoreOnDefault { get; set; }
+        public bool IgnoreOnDefault { get; set; } = true;
         #endregion
 
         #region Commands
         public abstract ICommand ResetCommand { get; set; }
+        #endregion
+
+        #region XmlSupport
+        public abstract XAttribute ConvertToAttribute();
+        public abstract XElement ConvertToElement();
         #endregion
     }
 
