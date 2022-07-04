@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.Imaging.Interop;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
@@ -15,6 +17,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public string ControlName { get; set; }
         public string DefaultMarkup { get; set; }
         public ImageMoniker Moniker { get; set; }
+        public bool AlwaysDefault { get; set; }
 
         private ObservableCollection<PropertyItemViewModel> _properties;
 
@@ -24,13 +27,28 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             set { SetProperty(ref _properties, value); }
         }
 
+        public ICommand ResetAllCommand { get; set; }
+
         public ComponentViewModel()
         {
             Properties = new ObservableCollection<PropertyItemViewModel>();
+            ResetAllCommand = new DelegateCommand(ResetAll);
+        }
+
+        private void ResetAll()
+        {
+            foreach(var property in Properties)
+            {
+                property.ResetCommand.Execute(null);
+            }
         }
 
         public virtual string GetCompiledComponent()
         {
+            if (AlwaysDefault)
+            {
+                return DefaultMarkup;
+            }
             XElement element = new(ControlName, "");
             foreach(var property in Properties)
             {

@@ -14,5 +14,13 @@ namespace AntDesignToolbox.Commons
             if (attribute is null) return;
             element.Add(attribute);
         }
+
+        public static void EnsureNotEmpty(this XElement element)
+        {
+            if (element.Elements().Count() == 0)
+            {
+                element.Add(new XText("\n\n"));
+            }
+        }
     }
 }

@@ -134,7 +134,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             Moniker = KnownMonikers.VisibleBorders,
             Properties = new OCP()
             {
-                new IntegerPropertyViewModel(){ PropertyName = "Count", DefaultValue = 2, Value = 2, Category = PropertyCategory.Number },
+                new IntegerOrIteratorPropertyViewModel(){ PropertyName = "Children", Count = 2, DefaultCount = 2, ChildrenTagName="SpaceItem", Category = PropertyCategory.Number },
                 new BP(){ PropertyName = "Split" },
                 new OP(){ PropertyName = "Align", DefaultValue = "", SelectedValue = "",
                     Options = new ObservableCollection<string>{"", "start", "end", "center", "baseline" } },
@@ -180,7 +180,24 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             }
 
         };
-
+        public static ComponentViewModel PageHeaderViewModel = new PageHeaderComponentViewModel()
+        {
+            ControlName = "PageHeader",
+            Moniker = KnownMonikers.PageHeader,
+            DefaultMarkup = @"<PageHeader Class=""site-page-header"" Title=""This is Title"" Subtitle=""This is a subtitle"" />
+",
+            Properties = new OCP()
+            {
+                new BP{ PropertyName = "Title" },
+                new BP{ PropertyName = "Subtitle" },
+                new BP{ PropertyName = "Content" },
+                new BP{ PropertyName = "Footer" },
+                new BP{ PropertyName = "Tags" },
+                new BP{ PropertyName = "Extra" },
+                new BP{ PropertyName = "Breadcrumb" },
+                new BP{ PropertyName = "Avatar" },
+            }
+        };
 
         public static ComponentViewModel SampleViewModel = new ComponentViewModel()
         {
@@ -194,6 +211,42 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         };
 
 
+
+    }
+
+    internal static class DefaultViewModelSourceHelper
+    {
+        public static ComponentViewModel Div = new ComponentViewModel()
+        {
+            ControlName = "<div>",
+            Moniker = KnownMonikers.None,
+            AlwaysDefault = true,   
+            DefaultMarkup = @"<div>
+
+</div>
+",
+        };
+        public static ComponentViewModel If = new ComponentViewModel()
+        {
+            ControlName = "@if",
+            Moniker = KnownMonikers.None,
+            AlwaysDefault = true,
+            DefaultMarkup = "\n@if( true )\n{\n\n}\n",
+        };
+        public static ComponentViewModel Foreach = new ComponentViewModel()
+        {
+            ControlName = "@foreach",
+            Moniker = KnownMonikers.None,
+            AlwaysDefault = true,
+            DefaultMarkup = "\n@foreach(var item in collection)\n{\n\n}\n",
+        };
+        public static ComponentViewModel CodeBlock = new ComponentViewModel()
+        {
+            ControlName = "@code",
+            Moniker = KnownMonikers.None,
+            AlwaysDefault = true,
+            DefaultMarkup = "\n@code{\n\n}\n",
+        };
 
     }
 }

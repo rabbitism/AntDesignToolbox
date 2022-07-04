@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AntDesignToolbox.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,12 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
     {
         public override string GetCompiledComponent()
         {
-            XElement element = new XElement("Layout", string.Empty);
+            XElement element = new XElement("Layout");
             AddElement(element, "Header");
             AddElement(element, "Sider");
             AddElement(element, "Content");
             AddElement(element, "Footer");
+            element.EnsureNotEmpty();
             return element.ToString()+"\n";
         }
 

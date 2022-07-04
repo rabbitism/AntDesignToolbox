@@ -20,10 +20,12 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 var splitElement = new XElement("Split", new XText("---"));
                 element.Add(splitElement);
             }
-            var countProperty = Properties.FirstOrDefault(a => a.PropertyName == "Count") as IntegerPropertyViewModel;
-            if (countProperty != null)
+            var childrenProperty = Properties.GetProperty<IntegerOrIteratorPropertyViewModel>("Children");
+
+            var hasChildren = childrenProperty.Iterate || (!childrenProperty.Iterate && childrenProperty.Count > 0);
+
+            if (hasChildren)
             {
-                int value = countProperty.Value ?? 0;
                 XElement root = element;
                 if(splitProperty != null && splitProperty.Value==true)
                 {
@@ -31,10 +33,20 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                     element.Add(childContent);
                     root = childContent;
                 }
-                for(int i =0; i< value; i++)
+                if (childrenProperty.Iterate)
                 {
-                    root.Add(new XElement("SpaceItem", "Item"));
+                    root.Add(new XText("\n@foreach (var item in collection)\n{\n"));
+                    root.Add(new XElement("SpaceItem", "@item"));
+                    root.Add(new XText("\n}\n"));
                 }
+                else
+                {
+                    for (uint i = 0; i < childrenProperty.Count; i++)
+                    {
+                        root.Add(new XElement("SpaceItem", $"item {i}"));
+                    }
+                }
+                root.EnsureNotEmpty();
             }
 
             element.Add(Properties.GetProperty<OptionsPropertyViewModel>("Align")?.ConvertToAttribute());

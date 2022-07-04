@@ -23,12 +23,31 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" MinHeight="100" />
         </Grid.RowDefinitions>
-        <TextBox Padding="4,2" />
-        <ListView Grid.Row="1"
+        <TextBox Padding="4,2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+        <!--<Expander Grid.Row="1" Header="Frequently Used">
+            <ListView ItemsSource="{Binding FixedTreeItems}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <views:ComponentTreeItemControl HorizontalAlignment="Stretch"
+                                                        ComponentName="{Binding Component.ControlName}"
+                                                        DataContext="{Binding}"
+                                                        Moniker="{Binding Component.Moniker}" />
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Expander>-->
+        <ListView Grid.Row="2"
                   ItemsSource="{Binding TreeItems}"
                   SelectedItem="{Binding SelectedItem}">
             <ListView.ItemContainerStyle>
@@ -46,13 +65,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <GridSplitter Grid.Row="2"
+        <GridSplitter Grid.Row="3"
                       Height="5"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Center"
                       Background="Transparent"
                       Foreground="Transparent" />
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -65,12 +84,18 @@
                    Content="Click to Copy or Drag to Razor file"
                    MouseLeave="Label_MouseMove_1"
                    MouseUp="Label_MouseUp">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding SelectedItem.Component.ResetAllCommand}" Header="Reset All Properties" />
+                    </ContextMenu>
+                </Label.ContextMenu>
                 <Label.Style>
                     <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="BorderBrush" Value="Yellow" />
+                                <Setter Property="BorderBrush" Value="#509CE9" />
+                                <!--  80 156 233  -->
                                 <!--  This won't work  -->
                             </Trigger>
                         </Style.Triggers>
