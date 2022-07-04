@@ -38,8 +38,7 @@
                     <views:ComponentTreeItemControl HorizontalAlignment="Stretch"
                                                     ComponentName="{Binding ControlName}"
                                                     DataContext="{Binding}"
-                                                    Moniker="{Binding Moniker}"
-                                                    MouseLeave="Label_MouseMove" />
+                                                    Moniker="{Binding Moniker}" />
 
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -20,8 +20,17 @@ namespace AntDesignToolbox
         public List<string> MyProperty { get; set; }
         public ControlToolboxControl()
         {
+            
             InitializeComponent();
             this.DataContext = new ControlToolboxViewModel();           
+        }
+
+        private void DragCompiledComponent(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if(e.LeftButton== System.Windows.Input.MouseButtonState.Pressed && DataContext is ControlToolboxViewModel vm)
+            {
+                vm.DragCompiledComponent(sender as DependencyObject);
+            }
         }
 
         private void Label_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)

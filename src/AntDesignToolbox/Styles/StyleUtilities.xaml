@@ -4,5 +4,9 @@
                Left="4"
                Right="4"
                Top="2" />
-
+    <Thickness x:Key="PropertyNamePadding"
+               Bottom="2"
+               Left="8"
+               Right="8"
+               Top="2" />
 </ResourceDictionary>

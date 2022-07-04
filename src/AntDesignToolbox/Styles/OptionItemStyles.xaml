@@ -16,8 +16,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
                    Content="{Binding PropertyName}"
-                   Style="{StaticResource PropertyNameStyle}"
                    ToolTip="{Binding PropertyName}">
                 <Label.ContextMenu>
                     <ContextMenu>
@@ -41,8 +41,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
                    Content="{Binding PropertyName}"
-                   Style="{Binding PropertyName}"
                    ToolTip="{Binding PropertyName}">
                 <Label.ContextMenu>
                     <ContextMenu>
@@ -64,8 +64,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
                    Content="{Binding PropertyName}"
-                   Style="{StaticResource PropertyNameStyle}"
                    ToolTip="{Binding PropertyName}">
                 <Label.ContextMenu>
                     <ContextMenu>

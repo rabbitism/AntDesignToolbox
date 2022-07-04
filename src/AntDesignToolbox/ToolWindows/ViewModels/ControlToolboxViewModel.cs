@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.Imaging;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
@@ -19,20 +20,11 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             }
         }
 
-        private ObservableCollection<PropertyItemViewModel> _selectedProperties;
-
-        public ObservableCollection<PropertyItemViewModel> SelectedProperties
-        {
-            get { return _selectedProperties; }
-            set { SetProperty(ref _selectedProperties, value); }
-        }
-
         #endregion
 
 
         public ControlToolboxViewModel()
         {
-            SelectedProperties = new ObservableCollection<PropertyItemViewModel>();
             TreeItems = new ObservableCollection<TreeItemViewModel>()
             {
                 new TreeItemViewModel(){
@@ -75,5 +67,10 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         }
 
+
+        public void DragCompiledComponent(DependencyObject source)
+        {
+            DragDrop.DoDragDrop(source, null, DragDropEffects.Copy);
+        }
     }
 }

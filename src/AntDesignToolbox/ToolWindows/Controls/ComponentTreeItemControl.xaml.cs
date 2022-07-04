@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.Imaging;
+﻿using AntDesignToolbox.ToolWindows.ViewModels;
+using Microsoft.VisualStudio.Imaging;
 using Microsoft.VisualStudio.Imaging.Interop;
 using System;
 using System.Collections.Generic;
@@ -46,9 +47,16 @@ namespace AntDesignToolbox.ToolWindows.Controls
         public static readonly DependencyProperty ComponentNameProperty =
             DependencyProperty.Register(nameof(ComponentName), typeof(string), typeof(ComponentTreeItemControl), new PropertyMetadata(string.Empty));
 
-
-
-
-
+        private void root_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton== MouseButtonState.Pressed)
+            {
+                if (this.DataContext != null && this.DataContext is TreeItemViewModel vm)
+                {
+                    DragDrop.DoDragDrop(sender as DependencyObject, vm.DefaultMarkup, DragDropEffects.Copy);
+                }
+            }
+            
+        }
     }
 }

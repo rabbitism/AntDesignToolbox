@@ -5,10 +5,13 @@
              xmlns:imaging="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.Imaging"
              xmlns:local="clr-namespace:AntDesignToolbox.ToolWindows.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AntDesignToolbox.ToolWindows.ViewModels"
              xmlns:vs="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
              x:Name="root"
+             d:DataContext="{d:DesignData Type={x:Type vm:TreeItemViewModel}}"
              vs:Themes.UseVsTheme="True"
              Background="Transparent"
+             MouseLeave="root_MouseLeave"
              mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>

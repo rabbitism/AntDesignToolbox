@@ -8,7 +8,8 @@ using Microsoft.VisualStudio.Utilities;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.Imaging.Interop;
-
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
@@ -20,6 +21,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         private ObservableCollection<PropertyItemViewModel> _properties;
 
+        public ICommand MouseLeaveCommand { get; set; }
+
         public ObservableCollection<PropertyItemViewModel> Properties { 
             get => _properties;
             set { SetProperty(ref _properties, value); } 
@@ -28,7 +31,17 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public TreeItemViewModel()
         {
             Properties = new ObservableCollection<PropertyItemViewModel>();
+            MouseLeaveCommand = new DelegateCommand<object>(OnMouseLeave);
         }
+
+        private void OnMouseLeave(object o)
+        {
+            object obj = o;
+            System.Diagnostics.Debug.WriteLine(obj.GetType().Name);
+
+        }
+
+
 
     }
 }
