@@ -11,11 +11,21 @@
 			<Group guid="AntDesignToolbox" id="AntDesignMenuGroup" priority="0x0001">
 				<Parent guid="AntDesignToolbox" id="AntDesignMenu"/>
 			</Group>
+			<Group guid="AntDesignToolbox" id="FolderContextMenuGroup">
+				<Parent guid="AntDesignToolbox" id="FolderContextMenu"/>
+			</Group>
 		</Groups>
+		
 
 		<Menus>
 			<Menu guid="AntDesignToolbox" id="AntDesignMenu" priority="0x0002">
 				<Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+				<Strings>
+					<ButtonText>Ant Design Blazor</ButtonText>
+				</Strings>
+			</Menu>
+			<Menu guid="AntDesignToolbox" id="FolderContextMenu" priority="0x0002">
+				<Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_ADD_ITEMS"/>
 				<Strings>
 					<ButtonText>Ant Design Blazor</ButtonText>
 				</Strings>
@@ -32,14 +42,31 @@
 					<LocCanonicalName>.View.MyToolWindow</LocCanonicalName>
 				</Strings>
 			</Button>
+			<Button guid="AntDesignToolbox" id="AddComponentCommand" type="Button">
+				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<Strings>
+					<ButtonText>Add Razor Component</ButtonText>
+				</Strings>
+			</Button>
 		</Buttons>
+		
 	</Commands>
 
+	<CommandPlacements>
+		<CommandPlacement guid="AntDesignToolbox" id="AddComponentCommand">
+			<Parent guid="AntDesignToolbox" id="FolderContextMenuGroup"/>
+		</CommandPlacement>
+	</CommandPlacements>
+	
 	<Symbols>
 		<GuidSymbol name="AntDesignToolbox" value="{ebd88e56-07f7-48b1-b706-49ce325a3002}">
 			<IDSymbol name="ControlToolboxCommand" value="0x0100" />
+			<IDSymbol name="AddComponentCommand" value="0x0101"/>
 			<IDSymbol name="AntDesignMenu" value="0x0001"/>
 			<IDSymbol name="AntDesignMenuGroup" value="0x0002"/>
+			<IDSymbol name="FolderContextMenuGroup" value="0x0003"/>
+			<IDSymbol name="FolderContextMenu" value="0x0004"/>
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AntDesignToolboxPackage.cs" />
+    <Compile Include="Commands\AddComponentCommand.cs" />
     <Compile Include="Commands\ControlToolboxCommand.cs" />
     <Compile Include="Commons\ViewModelHelper.cs" />
     <Compile Include="Commons\XmlHelpers.cs" />
