@@ -7,7 +7,6 @@ using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
 
-
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
     public abstract class PropertyItemViewModel: BindableBase

@@ -38,7 +38,6 @@ namespace AntDesignToolbox.ToolWindows.Controls
             DependencyProperty.Register(nameof(Moniker), typeof(ImageMoniker), typeof(ComponentTreeItemControl), new PropertyMetadata(KnownMonikers.None));
 
 
-
         public string ComponentName
         {
             get { return (string)GetValue(ComponentNameProperty); }
@@ -53,7 +52,7 @@ namespace AntDesignToolbox.ToolWindows.Controls
             {
                 if (this.DataContext != null && this.DataContext is TreeItemViewModel vm)
                 {
-                    DragDrop.DoDragDrop(sender as DependencyObject, vm.DefaultMarkup, DragDropEffects.Copy);
+                    DragDrop.DoDragDrop(sender as DependencyObject, vm.Component.DefaultMarkup, DragDropEffects.Copy);
                 }
             }
             

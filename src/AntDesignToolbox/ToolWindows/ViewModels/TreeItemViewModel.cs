@@ -15,23 +15,24 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 {
     public class TreeItemViewModel : BindableBase
     {
-        public string ControlName { get; set; }
-        public string DefaultMarkup { get; set; }
-        public ImageMoniker Moniker { get; set; }
+        private ComponentViewModel _component;
+        public ComponentViewModel Component
+        {
+            get { return _component; }
+            set { SetProperty(ref _component, value); }
+        }
 
-        private ObservableCollection<PropertyItemViewModel> _properties;
+        private ObservableCollection<TreeItemViewModel> _children;
 
-        public ICommand MouseLeaveCommand { get; set; }
-
-        public ObservableCollection<PropertyItemViewModel> Properties { 
-            get => _properties;
-            set { SetProperty(ref _properties, value); } 
+        public ObservableCollection<TreeItemViewModel> Children
+        {
+            get { return _children; }
+            set { SetProperty(ref _children, value); }
         }
 
         public TreeItemViewModel()
         {
-            Properties = new ObservableCollection<PropertyItemViewModel>();
-            MouseLeaveCommand = new DelegateCommand<object>(OnMouseLeave);
+
         }
 
         private void OnMouseLeave(object o)

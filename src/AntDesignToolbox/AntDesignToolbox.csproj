@@ -69,6 +69,7 @@
       <DependentUpon>ControlToolboxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolWindows\ControlToolboxWindow.cs" />
+    <Compile Include="ToolWindows\ViewModels\ComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\OptionItemViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\BooleanPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ControlToolboxViewModel.cs" />

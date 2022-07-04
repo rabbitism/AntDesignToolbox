@@ -36,9 +36,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <views:ComponentTreeItemControl HorizontalAlignment="Stretch"
-                                                    ComponentName="{Binding ControlName}"
+                                                    ComponentName="{Binding Component.ControlName}"
                                                     DataContext="{Binding}"
-                                                    Moniker="{Binding Moniker}" />
+                                                    Moniker="{Binding Component.Moniker}" />
 
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -73,7 +73,7 @@
                             <ItemsControl MinHeight="100"
                                           HorizontalAlignment="Stretch"
                                           HorizontalContentAlignment="Stretch"
-                                          ItemsSource="{Binding SelectedItem.Properties}">
+                                          ItemsSource="{Binding SelectedItem.Component.Properties}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel HorizontalAlignment="Stretch" />

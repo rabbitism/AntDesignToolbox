@@ -43,7 +43,7 @@ namespace AntDesignToolbox
                     {
                         if(l.DataContext is TreeItemViewModel v)
                         {
-                            DragDrop.DoDragDrop(l, v.DefaultMarkup, DragDropEffects.Copy);
+                            DragDrop.DoDragDrop(l, v.Component.DefaultMarkup, DragDropEffects.Copy);
                         }
                     }catch(Exception ex)
                     {
@@ -68,8 +68,8 @@ namespace AntDesignToolbox
                     System.Diagnostics.Debug.WriteLine("Dragged");
                     if(this.DataContext is ControlToolboxViewModel v && v.SelectedItem!=null)
                     {
-                        XElement element = new XElement(v.SelectedItem.ControlName);
-                        foreach(var property in v.SelectedItem.Properties)
+                        XElement element = new XElement(v.SelectedItem.Component.ControlName);
+                        foreach(var property in v.SelectedItem.Component.Properties)
                         {
                             if(property is StringPropertyViewModel sp)
                             {
