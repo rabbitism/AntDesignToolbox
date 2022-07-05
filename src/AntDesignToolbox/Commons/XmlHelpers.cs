@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace AntDesignToolbox.Commons
 {
-    public static class XmlHelpers
+    public static class XmlHelper
     {
         public static void AddNonNullAttribute(this XElement element, XAttribute attribute)
         {

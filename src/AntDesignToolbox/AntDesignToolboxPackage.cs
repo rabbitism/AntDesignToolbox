@@ -17,7 +17,7 @@ namespace AntDesignToolbox
     [Guid(PackageGuids.AntDesignToolboxString)]
     public sealed class AntDesignToolboxPackage : ToolkitPackage
     {
-        public DTE2 DTE { get; private set; }
+        public static DTE2 DTE { get; private set; }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
