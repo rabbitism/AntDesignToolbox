@@ -2,11 +2,13 @@
 
 **Requires Visual Studio 2022 or newer**
 
-Provides a tool windows for Blazor Developers using Ant Design Blazor. 
+Your companion for developing Blazor with Ant Design Blazor
+
+![demo](/docs/assets/demo.gif)
 
 ## Features
 
-1. Drag and Drop control from toolbox to razor file.
-2. Drap and Drop with customized control properties.
+1. [**WIP**] Drag and Drop control from toolbox to razor file.
+2. [**WIP**] Drap and Drop with customized control properties.
 3. Generate boilerplate razor component for specific scenarios.
-4. Customize and export code snippets. 
+4. [**WIP**] Customize and export code snippets. 
