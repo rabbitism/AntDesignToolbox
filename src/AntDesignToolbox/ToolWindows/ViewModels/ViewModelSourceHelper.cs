@@ -1,5 +1,10 @@
-﻿using Microsoft.VisualStudio.Imaging;
+﻿using AntDesignToolbox.ToolWindows.ViewModels.EnumOptions;
+using Microsoft.VisualStudio.Imaging;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 using BP = AntDesignToolbox.ToolWindows.ViewModels.BooleanPropertyViewModel;
 using OCP = System.Collections.ObjectModel.ObservableCollection<AntDesignToolbox.ToolWindows.ViewModels.PropertyItemViewModel>;
 using OP = AntDesignToolbox.ToolWindows.ViewModels.OptionsPropertyViewModel;
@@ -17,11 +22,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             DefaultMarkup = @"<Button Type=""@ButtonType.Primary"">Primary</Button>",
             Properties = new OCP
             {
-                new OP(){
-                                PropertyName = "Type",
-                                DefaultValue="@ButtonType.Primary",
-                                SelectedValue = "@ButtonType.Primary",
-                                Options= new ObservableCollection<string>{ "@ButtonType.Primary", "@ButtonType.Link", "@ButtonType.Default"} },
+                EnumOptionHelper.GetOptionsViewModel<ButtonType>("Type"),
                 new SP(){ PropertyName = "Content", DefaultValue = "", Value = ""},
                 new BP(){ PropertyName = "Danger"},
                 new BP(){ PropertyName = "Disabled"},
@@ -215,6 +216,29 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             DefaultMarkup = @"<Icon Type=""ant-design"" Theme=""outline""/>",
             Moniker = KnownMonikers.ImageIcon,
         };
+        public static ComponentViewModel DropdownButtonViewModel = new ComponentViewModel()
+        {
+            ControlName = "DropdownButton",
+            ControlDisplayName = "DropdownButton",
+            DefaultMarkup = @"<DropdownButton>
+    <Overlay>
+        
+    </Overlay>
+    <ChildContent>
+        
+    </ChildContent>
+</DropdownButton>"
+,
+            Moniker = KnownMonikers.ComboBoxItem,
+            Properties = new OCP
+            {
+                EnumOptionHelper.GetOptionsViewModel<ButtonSize>("Size"),
+                EnumOptionHelper.GetOptionsViewModel<ButtonType>("Type"),
+                new BP(){ PropertyName = "Danger" },
+                new BP(){ PropertyName = "Ghost" },
+                new BP(){ PropertyName = "Loading" }
+            }
+        };
 
         public static ComponentViewModel SampleViewModel = new ComponentViewModel()
         {
@@ -265,5 +289,41 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             DefaultMarkup = "\n@code{\n\n}\n",
         };
 
+    }
+
+    internal static class EnumOptionHelper
+    {
+        public static StringOptionsViewModel GetOptionsViewModel<T>(string propertyName) where T: System.Enum
+        {
+            IEnumerable<T> values = Enum.GetValues(typeof(T)).OfType<T>();
+            var fields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+            List<StringOptionItemViewModel> list = new List<StringOptionItemViewModel>();
+            StringOptionItemViewModel @default = null;
+            foreach(var field in fields)
+            {
+                var attributes = field.CustomAttributes;
+                string fieldName = field.Name;
+                var stringValue = field.GetCustomAttributes<StringValueAttribute>(false).FirstOrDefault()?.StringValue ?? fieldName;
+                var display = field.GetCustomAttributes<DisplayAttribute>(false).FirstOrDefault()?.Name ?? fieldName;
+                var isDefault = field.GetCustomAttributes<DefaultAttribute>(false).FirstOrDefault()?.IsDefault ?? false;
+                StringOptionItemViewModel vm = new StringOptionItemViewModel(display, stringValue);
+                if(@default is null && isDefault)
+                {
+                    @default = vm;
+                }
+                list.Add(vm);
+            }
+            if(@default is null && list.Count > 0)
+            {
+                @default = list[0];
+            }
+            return new StringOptionsViewModel()
+            {
+                PropertyName = propertyName,
+                DefaultValue = @default,
+                Options = new ObservableCollection<StringOptionItemViewModel>(list),
+                SelectedValue = @default,
+            };
+        }
     }
 }

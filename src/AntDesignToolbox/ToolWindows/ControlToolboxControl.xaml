@@ -58,7 +58,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <views:ComponentTreeItemControl HorizontalAlignment="Stretch"
-                                                    ComponentName="{Binding Component.ControlName}"
+                                                    ComponentName="{Binding Component.ControlDisplayName}"
                                                     DataContext="{Binding}"
                                                     Moniker="{Binding Component.Moniker}" />
 
@@ -95,8 +95,6 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="BorderBrush" Value="#509CE9" />
-                                <!--  80 156 233  -->
-                                <!--  This won't work  -->
                             </Trigger>
                         </Style.Triggers>
 

@@ -41,6 +41,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         }
         public static bool operator ==(StringOptionItemViewModel v1, StringOptionItemViewModel v2)
         {
+            if (v1 is null) return v2 is null;
             return v1.Equals(v2);
         }
         public static bool operator !=(StringOptionItemViewModel v1, StringOptionItemViewModel v2)

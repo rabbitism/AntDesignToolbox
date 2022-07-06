@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using System.Windows.Input;
 using Prism.Commands;
+using AntDesignToolbox.Commons;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
@@ -68,29 +69,9 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                         element.Add(new XAttribute(sp.PropertyName, sp.Value));
                     }
                 }
-                else if (property is BooleanPropertyViewModel bp)
+                else
                 {
-                    if(bp.IgnoreOnDefault && bp.Value== bp.DefaultValue)
-                    {
-                        continue;
-                    }
-                    element.Add(new XAttribute(bp.PropertyName, bp.Value.ToString().ToLower()));
-                }
-                else if (property is OptionsPropertyViewModel op)
-                {
-                    if (op.IgnoreOnDefault && op.SelectedValue == op.DefaultValue)
-                    {
-                        continue;
-                    }
-                    element.Add(new XAttribute(op.PropertyName, op.SelectedValue));
-                }
-                else if(property is IntegerPropertyViewModel ip)
-                {
-                    if(ip.IgnoreOnDefault && ip.DefaultValue == ip.Value)
-                    {
-                        continue;
-                    }
-                    element.Add(new XElement(ip.PropertyName, ip.Value));
+                    element.AddNonNullAttribute(property.ConvertToAttribute());
                 }
             }
 

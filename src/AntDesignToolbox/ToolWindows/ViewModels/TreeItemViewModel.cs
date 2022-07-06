@@ -32,7 +32,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         public TreeItemViewModel()
         {
-
+            
         }
     }
 }

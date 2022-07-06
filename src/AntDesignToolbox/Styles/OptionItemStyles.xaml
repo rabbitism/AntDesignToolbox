@@ -174,11 +174,8 @@
             <ComboBox Grid.Column="1"
                       Padding="{StaticResource DefaultPadding}"
                       VerticalContentAlignment="Center"
-                      IsEditable="True"
                       ItemsSource="{Binding Options}"
-                      SelectedItem="{Binding SelectedValue}"
-                      StaysOpenOnEdit="True"
-                      TextSearch.TextPath="DisplayName">
+                      SelectedItem="{Binding SelectedValue}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Padding="0" Content="{Binding DisplayName}" />
@@ -212,11 +209,8 @@
             <ComboBox Grid.Column="1"
                       Padding="{StaticResource DefaultPadding}"
                       VerticalContentAlignment="Center"
-                      IsEditable="True"
                       ItemsSource="{Binding Themes, IsAsync=True}"
-                      SelectedItem="{Binding SelectedTheme}"
-                      StaysOpenOnEdit="True"
-                      TextSearch.TextPath="DisplayName">
+                      SelectedItem="{Binding SelectedTheme}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Padding="0" Content="{Binding DisplayName}" />
@@ -238,11 +232,8 @@
                       Grid.Column="1"
                       Padding="{StaticResource DefaultPadding}"
                       VerticalContentAlignment="Center"
-                      IsEditable="True"
                       ItemsSource="{Binding Types, IsAsync=True}"
-                      SelectedItem="{Binding SelectedType}"
-                      StaysOpenOnEdit="True"
-                      TextSearch.TextPath="DisplayName">
+                      SelectedItem="{Binding SelectedType}">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel Orientation="Vertical" />

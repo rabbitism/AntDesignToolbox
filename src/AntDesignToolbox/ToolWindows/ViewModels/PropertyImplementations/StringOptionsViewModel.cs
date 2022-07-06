@@ -33,7 +33,11 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         public override XAttribute ConvertToAttribute()
         {
-            throw new NotImplementedException();
+            if (IgnoreOnDefault && SelectedValue == DefaultValue)
+            {
+                return null;
+            }
+            return new XAttribute(PropertyName, SelectedValue?.Value ?? string.Empty);
         }
 
         public override XElement ConvertToElement()

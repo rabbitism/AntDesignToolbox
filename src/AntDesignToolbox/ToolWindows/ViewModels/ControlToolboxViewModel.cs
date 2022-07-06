@@ -51,12 +51,13 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new TreeItemViewModel(){ Component = ViewModelSourceHelper.LayoutViewModel },
                 new TreeItemViewModel(){ Component = ViewModelSourceHelper.BreadcrumbViewModel },
                 new TreeItemViewModel(){ Component = ViewModelSourceHelper.PageHeaderViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.IconViewModel }
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.IconViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.DropdownButtonViewModel }
             };
 
             _allControls = items.OrderBy(a=>a.Component.ControlName).ToList();
 
-            TreeItems = new ObservableCollection<TreeItemViewModel>(items.OrderBy(a => a.Component.ControlName));
+            TreeItems = new ObservableCollection<TreeItemViewModel>(items.OrderBy(a => a.Component.ControlDisplayName));
         }
 
 
@@ -76,7 +77,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 }
                 return;
             }
-            var items = _allControls.Where(a => a.Component.ControlName.ToLower().Contains(s.ToLower())).OrderBy(a => a.Component.ControlName);
+            var items = _allControls.Where(a => a.Component.ControlName.ToLower().Contains(s.ToLower())).OrderBy(a => a.Component.ControlDisplayName);
             TreeItems.Clear();
             foreach(var item in items)
             {
