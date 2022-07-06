@@ -96,17 +96,20 @@
     </Compile>
     <Compile Include="ToolWindows\ControlToolboxWindow.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentImplementations\BreadcrumbComponentViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\IconComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentImplementations\LayoutComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentImplementations\PageHeaderComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentImplementations\SpaceComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IconTypePropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IntegerOrIteratorPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IntegerPropertyViewModel.cs" />
-    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\OptionItemViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\StringOptionItemViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\BooleanPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ControlToolboxViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyCategory.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\OptionsPropertyViewModel.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\StringOptionsViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyItemViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\StringPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\TreeItemViewModel.cs" />

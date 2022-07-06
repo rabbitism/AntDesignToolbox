@@ -11,7 +11,9 @@
     <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
     <DataTemplate DataType="{x:Type vm:StringPropertyViewModel}">
-        <Grid MinHeight="20" HorizontalAlignment="Stretch">
+        <Grid MinHeight="20"
+              Margin="1"
+              HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -36,7 +38,9 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:IntegerPropertyViewModel}">
-        <Grid MinHeight="20" HorizontalAlignment="Stretch">
+        <Grid MinHeight="20"
+              Margin="1"
+              HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -61,7 +65,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:BooleanPropertyViewModel}">
-        <Grid HorizontalAlignment="Stretch">
+        <Grid Margin="1" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -110,7 +114,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:IntegerOrIteratorPropertyViewModel}">
-        <Grid HorizontalAlignment="Stretch">
+        <Grid Margin="1" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -146,6 +150,110 @@
                          IsEnabled="{Binding Iterate, Converter={StaticResource InverseBooleanConverter}}"
                          Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:StringOptionsViewModel}">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
+                   Content="{Binding PropertyName}"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <ComboBox Grid.Column="1"
+                      Padding="{StaticResource DefaultPadding}"
+                      VerticalContentAlignment="Center"
+                      IsEditable="True"
+                      ItemsSource="{Binding Options}"
+                      SelectedItem="{Binding SelectedValue}"
+                      StaysOpenOnEdit="True"
+                      TextSearch.TextPath="DisplayName">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Padding="0" Content="{Binding DisplayName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:IconTypePropertyViewModel}">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
+                   Content="Theme"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <ComboBox Grid.Column="1"
+                      Padding="{StaticResource DefaultPadding}"
+                      VerticalContentAlignment="Center"
+                      IsEditable="True"
+                      ItemsSource="{Binding Themes, IsAsync=True}"
+                      SelectedItem="{Binding SelectedTheme}"
+                      StaysOpenOnEdit="True"
+                      TextSearch.TextPath="DisplayName">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Padding="0" Content="{Binding DisplayName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
+                   Content="Icon Type"
+                   ToolTip="{Binding PropertyName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <ComboBox Grid.Row="1"
+                      Grid.Column="1"
+                      Padding="{StaticResource DefaultPadding}"
+                      VerticalContentAlignment="Center"
+                      IsEditable="True"
+                      ItemsSource="{Binding Types, IsAsync=True}"
+                      SelectedItem="{Binding SelectedType}"
+                      StaysOpenOnEdit="True"
+                      TextSearch.TextPath="DisplayName">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Padding="0" Content="{Binding DisplayName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

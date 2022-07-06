@@ -12,6 +12,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel ButtonViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Button",
+            ControlDisplayName = "Button",
             Moniker = KnownMonikers.Button,
             DefaultMarkup = @"<Button Type=""@ButtonType.Primary"">Primary</Button>",
             Properties = new OCP
@@ -30,6 +31,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel TextViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Text",
+            ControlDisplayName = "Typography - Text",
             Moniker = KnownMonikers.TextElement,
             DefaultMarkup = @"<Text>Ant Design</Text>",
             Properties = new OCP
@@ -54,6 +56,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel TitleViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Title",
+            ControlDisplayName = "Typography - Title",
             Moniker = KnownMonikers.TextElement,
             DefaultMarkup = @"<Title>Ant Design</Title>",
             Properties = new OCP
@@ -82,6 +85,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel ParagraphViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Paragraph",
+            ControlDisplayName = "Typography - Paragraph",
             Moniker = KnownMonikers.TextElement,
             DefaultMarkup = @"<Paragraph>Ant Design</Paragraph>",
             Properties = new OCP
@@ -106,6 +110,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel DividerViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Divider",
+            ControlDisplayName = "Divider",
             Moniker = KnownMonikers.Splitter,
             DefaultMarkup = @"<Divider />",
             Properties = new OCP()
@@ -123,6 +128,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel SpaceViewModel { get; } = new SpaceComponentViewModel()
         {
             ControlName = "Space",
+            ControlDisplayName = "Space",
             DefaultMarkup = @"<Space>
     <SpaceItem>
         Space
@@ -146,6 +152,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel LayoutViewModel { get; } = new LayoutComponentViewModel()
         {
             ControlName = "Layout",
+            ControlDisplayName = "Layout",
             DefaultMarkup = @"<Layout>
     <Header>header</Header>
     <Layout>
@@ -167,6 +174,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         public static ComponentViewModel BreadcrumbViewModel { get; } = new BreadcrumbComponentViewModel()
         {
             ControlName = "Breadcrumb",
+            ControlDisplayName = "Breadcrumb",
             Moniker = KnownMonikers.Forwardslash,
             DefaultMarkup = @"<Breadcrumb>
 	<BreadcrumbItem>Home</BreadcrumbItem>
@@ -180,9 +188,11 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             }
 
         };
+
         public static ComponentViewModel PageHeaderViewModel = new PageHeaderComponentViewModel()
         {
             ControlName = "PageHeader",
+            ControlDisplayName = "Page Header",
             Moniker = KnownMonikers.PageHeader,
             DefaultMarkup = @"<PageHeader Class=""site-page-header"" Title=""This is Title"" Subtitle=""This is a subtitle"" />
 ",
@@ -197,6 +207,13 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new BP{ PropertyName = "Breadcrumb" },
                 new BP{ PropertyName = "Avatar" },
             }
+        };
+        public static ComponentViewModel IconViewModel { get; } = new IconComponentViewModel()
+        {
+            ControlName= "Icon",
+            ControlDisplayName = "Icon",
+            DefaultMarkup = @"<Icon Type=""ant-design"" Theme=""outline""/>",
+            Moniker = KnownMonikers.ImageIcon,
         };
 
         public static ComponentViewModel SampleViewModel = new ComponentViewModel()

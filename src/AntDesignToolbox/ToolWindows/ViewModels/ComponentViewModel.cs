@@ -15,13 +15,14 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
     public class ComponentViewModel: BindableBase
     {
         public string ControlName { get; set; }
+        public string ControlDisplayName { get; set; }
         public string DefaultMarkup { get; set; }
         public ImageMoniker Moniker { get; set; }
         public bool AlwaysDefault { get; set; }
 
         private ObservableCollection<PropertyItemViewModel> _properties;
 
-        public ObservableCollection<PropertyItemViewModel> Properties
+        public virtual ObservableCollection<PropertyItemViewModel> Properties
         {
             get { return _properties; }
             set { SetProperty(ref _properties, value); }

@@ -51,6 +51,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new TreeItemViewModel(){ Component = ViewModelSourceHelper.LayoutViewModel },
                 new TreeItemViewModel(){ Component = ViewModelSourceHelper.BreadcrumbViewModel },
                 new TreeItemViewModel(){ Component = ViewModelSourceHelper.PageHeaderViewModel },
+                new TreeItemViewModel(){ Component = ViewModelSourceHelper.IconViewModel }
             };
 
             _allControls = items.OrderBy(a=>a.Component.ControlName).ToList();
