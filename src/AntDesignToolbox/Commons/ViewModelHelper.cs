@@ -12,7 +12,7 @@ namespace AntDesignToolbox.Commons
     {
         public static T GetProperty<T>( this ObservableCollection<PropertyItemViewModel> collection, string name) where T:PropertyItemViewModel
         {
-            var property = collection.FirstOrDefault(a => a.PropertyName == name) as T;
+            var property = collection.OfType<T>().FirstOrDefault(a => a.PropertyName == name);
             return property;
         }
     }

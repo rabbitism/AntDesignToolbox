@@ -95,16 +95,21 @@
       <DependentUpon>ControlToolboxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolWindows\ControlToolboxWindow.cs" />
-    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\BreadcrumbComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentImplementations\IconComponentViewModel.cs" />
-    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\LayoutComponentViewModel.cs" />
-    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\PageHeaderComponentViewModel.cs" />
-    <Compile Include="ToolWindows\ViewModels\ComponentImplementations\SpaceComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ComponentViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\EnumOptions\ButtonSize.cs" />
     <Compile Include="ToolWindows\ViewModels\EnumOptions\ButtonType.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\Direction.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\MenuMode.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\MenuTheme.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\NavLinkMatch.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\Placement.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\Size.cs" />
     <Compile Include="ToolWindows\ViewModels\EnumOptions\StringValueAttribute.cs" />
     <Compile Include="ToolWindows\ViewModels\EnumOptions\DefaultAttribute.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\TitleLevel.cs" />
+    <Compile Include="ToolWindows\ViewModels\EnumOptions\TypographyType.cs" />
+    <Compile Include="ToolWindows\ViewModels\PropertyImplementations\ContainsElementPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IconTypePropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IntegerOrIteratorPropertyViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\PropertyImplementations\IntegerPropertyViewModel.cs" />
@@ -169,6 +174,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
     <Reference Include="System.ComponentModel.Composition" />

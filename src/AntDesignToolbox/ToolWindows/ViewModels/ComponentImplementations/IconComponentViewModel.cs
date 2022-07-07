@@ -38,9 +38,9 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 element.Add(new XAttribute("Type", property.SelectedType?.Value??string.Empty));
             }
 
-            element.AddNonNullAttribute(Properties.GetProperty<BooleanPropertyViewModel>("Spin").ConvertToAttribute());
-            element.AddNonNullAttribute(Properties.GetProperty<IntegerPropertyViewModel>("Rotate").ConvertToAttribute());
-            element.AddNonNullAttribute(Properties.GetProperty<StringPropertyViewModel>("TwoToneColor").ConvertToAttribute());
+            element.AddNonNullAttributes(Properties.GetProperty<BooleanPropertyViewModel>("Spin").ConvertToAttributes());
+            element.AddNonNullAttributes(Properties.GetProperty<IntegerPropertyViewModel>("Rotate").ConvertToAttributes());
+            element.AddNonNullAttributes(Properties.GetProperty<StringPropertyViewModel>("TwoToneColor").ConvertToAttributes());
 
             return element.ToString()+"\n";
         }

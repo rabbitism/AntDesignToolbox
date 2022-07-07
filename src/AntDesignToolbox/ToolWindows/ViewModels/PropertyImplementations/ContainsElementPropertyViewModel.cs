@@ -5,48 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml.Linq;
+using Prism.Mvvm;
 using Prism.Commands;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels
 {
-    public class BooleanPropertyViewModel : PropertyItemViewModel
+    internal class ContainsElementPropertyViewModel : PropertyItemViewModel
     {
-        public bool? DefaultValue { get; set; } = false;
-
+        #region Properties
+        public override bool IsAttribute { get; set; } = false;
         private bool? _value;
         public bool? Value
         {
             get { return _value; }
             set { SetProperty(ref _value, value); }
         }
+        public bool? DefaultValue { get; set; } = false;
 
+
+        #endregion
         public override ICommand ResetCommand { get; set; }
 
-        public BooleanPropertyViewModel()
+        public ContainsElementPropertyViewModel()
         {
-            ResetCommand = new DelegateCommand(() => { Value = DefaultValue; });
+            ResetCommand = new DelegateCommand(Reset);
             Value = false;
+        }
+
+        private void Reset()
+        {
+            Value = DefaultValue;
         }
 
         public override IEnumerable<XAttribute> ConvertToAttributes()
         {
-            if(IgnoreOnDefault && DefaultValue == Value)
-            {
-                yield break;
-            }
-            if (Value == null)
-            {
-                yield break;
-            }
-            else
-            {
-                yield return new XAttribute(PropertyName, Value.ToString().ToLower());
-            }
+            throw new NotImplementedException();
         }
 
         public override IEnumerable<XNode> ConvertToNodes()
         {
-            throw new NotImplementedException();
+            if(Value == true)
+            {
+                yield return new XElement(PropertyName, PropertyName);
+            }
         }
     }
 }

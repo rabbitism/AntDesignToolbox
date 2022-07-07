@@ -54,28 +54,17 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             XElement element = new(ControlName, "");
             foreach(var property in Properties)
             {
-                if (property is StringPropertyViewModel sp)
+                if (property.IsAttribute)
                 {
-                    if(sp.IgnoreOnDefault && sp.Value== sp.DefaultValue)
-                    {
-                        continue;
-                    }
-                    if (sp.PropertyName == "Content" || sp.PropertyName == "ChildContent")
-                    {
-                        element.Add(new XText(sp.Value));
-                    }
-                    else
-                    {
-                        element.Add(new XAttribute(sp.PropertyName, sp.Value));
-                    }
+                    element.AddNonNullAttributes(property.ConvertToAttributes());
                 }
                 else
                 {
-                    element.AddNonNullAttribute(property.ConvertToAttribute());
+                    element.AddNonNullNodes(property.ConvertToNodes());
                 }
             }
 
-            return element.ToString( SaveOptions.DisableFormatting)+"\n";
+            return element.ToString()+"\n";
         }
 
     }

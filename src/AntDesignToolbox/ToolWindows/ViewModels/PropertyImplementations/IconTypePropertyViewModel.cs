@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Xml.Linq;
 
@@ -68,17 +69,24 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
 
 
-        public override XAttribute ConvertToAttribute()
+        public override IEnumerable<XAttribute> ConvertToAttributes()
+        {
+            if (SelectedTheme != null)
+            {
+                yield return new XAttribute("Theme", SelectedTheme.Value);
+            }
+            if(SelectedType != null)
+            {
+                yield return new XAttribute("Type", SelectedType.Value);
+            }
+        }
+
+        public override IEnumerable<XNode> ConvertToNodes()
         {
             throw new NotImplementedException();
         }
 
-        public override XElement ConvertToElement()
-        {
-            throw new NotImplementedException();
-        }
-
-        private ObservableCollection<StringOptionItemViewModel> _outlinedTypes = new()
+        private readonly ObservableCollection<StringOptionItemViewModel> _outlinedTypes = new()
         {
             new StringOptionItemViewModel("AccountBook","@IconType.Outline.AccountBook"),
             new StringOptionItemViewModel("Aim","@IconType.Outline.Aim"),
@@ -503,7 +511,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         };
 
-        private ObservableCollection<StringOptionItemViewModel> _filledTypes = new()
+        private readonly ObservableCollection<StringOptionItemViewModel> _filledTypes = new()
         {
             new StringOptionItemViewModel("AccountBook","@IconType.Fill.AccountBook"),
             new StringOptionItemViewModel("Alert","@IconType.Fill.Alert"),
@@ -725,7 +733,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             new StringOptionItemViewModel("ZhihuSquare","@IconType.Fill.ZhihuSquare"),
         };
 
-        private ObservableCollection<StringOptionItemViewModel> _twoToneTypes = new()
+        private readonly ObservableCollection<StringOptionItemViewModel> _twoToneTypes = new()
         {
             new StringOptionItemViewModel("AccountBook","@IconType.TwoTone.AccountBook"),
             new StringOptionItemViewModel("Alert","@IconType.TwoTone.Alert"),

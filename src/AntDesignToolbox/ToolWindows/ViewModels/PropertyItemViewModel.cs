@@ -27,7 +27,16 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             set { SetProperty(ref _category, value); }
         }
 
+        private string _propertyDisplayName;
+        public string PropertyDisplayName
+        {
+            get { return _propertyDisplayName; }
+            set { SetProperty(ref _propertyDisplayName, value); }
+        }
+
+
         public bool IgnoreOnDefault { get; set; } = true;
+        public virtual bool IsAttribute { get; set; } = true;
         #endregion
 
         #region Commands
@@ -35,8 +44,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         #endregion
 
         #region XmlSupport
-        public abstract XAttribute ConvertToAttribute();
-        public abstract XElement ConvertToElement();
+        public abstract IEnumerable<XAttribute> ConvertToAttributes();
+        public abstract IEnumerable<XNode> ConvertToNodes();
         #endregion
     }
 

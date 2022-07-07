@@ -23,7 +23,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             Properties = new OCP
             {
                 EnumOptionHelper.GetOptionsViewModel<ButtonType>("Type"),
-                new SP(){ PropertyName = "Content", DefaultValue = "", Value = ""},
+                new SP(){ PropertyName = "Content", DefaultValue = "", Value = "", IsAttribute = false},
                 new BP(){ PropertyName = "Danger"},
                 new BP(){ PropertyName = "Disabled"},
                 new BP(){ PropertyName = "Block"},
@@ -46,12 +46,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new BP(){ PropertyName = "Keyboard" },
                 new BP(){ PropertyName = "Underline" },
                 new BP(){ PropertyName = "Strong" },
-                new OP(){
-                                PropertyName = "Type",
-                                DefaultValue="",
-                                SelectedValue = "",
-                                Options= new ObservableCollection<string>{"", "secondary", "warning", "danger"}
-                },
+                EnumOptionHelper.GetOptionsViewModel<TypographyType>("Type", true),
+                
             }
         };
         public static ComponentViewModel TitleViewModel { get; } = new ComponentViewModel()
@@ -71,16 +67,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new BP(){ PropertyName = "Keyboard" },
                 new BP(){ PropertyName = "Underline" },
                 new BP(){ PropertyName = "Strong" },
-                new OP(){
-                                PropertyName = "Type",
-                                DefaultValue="",
-                                SelectedValue = "",
-                                Options= new ObservableCollection<string>{"", "secondary", "warning", "danger"}},
-                new OP(){
-                                PropertyName = "Level",
-                                DefaultValue="h1",
-                                SelectedValue = "h1",
-                                Options= new ObservableCollection<string>{"h1", "h2", "h3", "h4"} }
+                EnumOptionHelper.GetOptionsViewModel<TypographyType>("Type", true),
+                EnumOptionHelper.GetOptionsViewModel<TitleLevel>("Level"),
             }
         };
         public static ComponentViewModel ParagraphViewModel { get; } = new ComponentViewModel()
@@ -100,12 +88,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new BP(){ PropertyName = "Keyboard" },
                 new BP(){ PropertyName = "Underline" },
                 new BP(){ PropertyName = "Strong" },
-                new OP(){
-                                PropertyName = "Type",
-                                DefaultValue="",
-                                SelectedValue = "",
-                                Options= new ObservableCollection<string>{"", "secondary", "warning", "danger"}
-                },
+                EnumOptionHelper.GetOptionsViewModel<TypographyType>("Type", true),
             }
         };
         public static ComponentViewModel DividerViewModel { get; } = new ComponentViewModel()
@@ -126,7 +109,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                                 Options= new ObservableCollection<string>{"", "DirectionVHType.Vertical" } },
             },
         };
-        public static ComponentViewModel SpaceViewModel { get; } = new SpaceComponentViewModel()
+        public static ComponentViewModel SpaceViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Space",
             ControlDisplayName = "Space",
@@ -145,12 +128,12 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new BP(){ PropertyName = "Split" },
                 new OP(){ PropertyName = "Align", DefaultValue = "", SelectedValue = "",
                     Options = new ObservableCollection<string>{"", "start", "end", "center", "baseline" } },
-                new OP(){ PropertyName = "Direction", DefaultValue = "horizontal", SelectedValue=  "horizontal", Options = new ObservableCollection<string>{"horizontal", "vertical"}},
-                new OP(){PropertyName = "Size", DefaultValue = "small", SelectedValue = "small", Options = new ObservableCollection<string>{ "small", "middle", "large" } },
+                EnumOptionHelper.GetOptionsViewModel<Direction>("Direction"),
+                EnumOptionHelper.GetOptionsViewModel<Size>("Size"),
                 new BP(){PropertyName = "Wrap" }
             }
         };
-        public static ComponentViewModel LayoutViewModel { get; } = new LayoutComponentViewModel()
+        public static ComponentViewModel LayoutViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Layout",
             ControlDisplayName = "Layout",
@@ -162,17 +145,18 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         <Sider>right sidebar</Sider>
     </Layout>
     <Footer>footer</Footer>
-</Layout>",
+</Layout>"
+,
             Moniker = KnownMonikers.LayoutPanel,
-            Properties = new OCP()
+            Properties = new OCP
             {
-                new BP(){ PropertyName = "Header" },
-                new BP(){ PropertyName = "Sider" },
-                new BP(){ PropertyName = "Content" },
-                new BP(){ PropertyName = "Footer" },
+                new ContainsElementPropertyViewModel(){ PropertyName = "Header", PropertyDisplayName = "Header" },
+                new ContainsElementPropertyViewModel(){ PropertyName = "Sider", PropertyDisplayName = "Header" },
+                new ContainsElementPropertyViewModel(){ PropertyName = "Content", PropertyDisplayName = "Content" },
+                new ContainsElementPropertyViewModel(){ PropertyName = "Footer", PropertyDisplayName = "Footer" },
             }
         };
-        public static ComponentViewModel BreadcrumbViewModel { get; } = new BreadcrumbComponentViewModel()
+        public static ComponentViewModel BreadcrumbViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "Breadcrumb",
             ControlDisplayName = "Breadcrumb",
@@ -184,13 +168,11 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 ",
             Properties = new OCP()
             {
-                new IntegerPropertyViewModel(){ PropertyName = "Count", DefaultValue = 2, Value = 2 },
+                new IntegerOrIteratorPropertyViewModel(){ PropertyName = "Count", DefaultCount = 2, Count=2, ChildrenTagName = "BreadcrumbItem" },
                 new SP(){ PropertyName = "Separator", DefaultValue = string.Empty, Value = string.Empty }
             }
-
         };
-
-        public static ComponentViewModel PageHeaderViewModel = new PageHeaderComponentViewModel()
+        public static ComponentViewModel PageHeaderViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "PageHeader",
             ControlDisplayName = "Page Header",
@@ -199,14 +181,14 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 ",
             Properties = new OCP()
             {
-                new BP{ PropertyName = "Title" },
-                new BP{ PropertyName = "Subtitle" },
-                new BP{ PropertyName = "Content" },
-                new BP{ PropertyName = "Footer" },
-                new BP{ PropertyName = "Tags" },
-                new BP{ PropertyName = "Extra" },
-                new BP{ PropertyName = "Breadcrumb" },
-                new BP{ PropertyName = "Avatar" },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Title", PropertyName="PageHeaderTitle", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Subtitle",PropertyName="PageHeaderSubtitle", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Content",PropertyName="PageHeaderContent", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Footer",PropertyName="PageHeaderFooter", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Tags",PropertyName="PageHeaderTags", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Extra",PropertyName="PageHeaderExtra", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Breadcrumb",PropertyName="PageHeaderBreadcrumb", IsAttribute =false },
+                new ContainsElementPropertyViewModel{ PropertyDisplayName = "Avatar",PropertyName="PageHeaderAvatar", IsAttribute =false },
             }
         };
         public static ComponentViewModel IconViewModel { get; } = new IconComponentViewModel()
@@ -216,7 +198,32 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             DefaultMarkup = @"<Icon Type=""ant-design"" Theme=""outline""/>",
             Moniker = KnownMonikers.ImageIcon,
         };
-        public static ComponentViewModel DropdownButtonViewModel = new ComponentViewModel()
+        public static ComponentViewModel DropdownButtonViewModel { get; } = new ComponentViewModel()
+        {
+            ControlName = "DropdownButton",
+            ControlDisplayName = "DropdownButton",
+            DefaultMarkup = @"<DropdownButton>
+    <Overlay>
+        
+    </Overlay>
+    <ChildContent>
+        
+    </ChildContent>
+</DropdownButton>
+",
+            Moniker = KnownMonikers.ComboBoxItem,
+            Properties = new OCP
+            {
+                EnumOptionHelper.GetOptionsViewModel<ButtonSize>("Size"),
+                EnumOptionHelper.GetOptionsViewModel<ButtonType>("Type"),
+                new BP(){ PropertyName = "Danger" },
+                new BP(){ PropertyName = "Ghost" },
+                new BP(){ PropertyName = "Loading" },
+                new ContainsElementPropertyViewModel(){ PropertyName="Overlay", PropertyDisplayName="Overlay", DefaultValue = true, Value = true, IgnoreOnDefault = false },
+                new ContainsElementPropertyViewModel(){ PropertyName="ChildContent", PropertyDisplayName="ChildContent", DefaultValue = true, Value = true, IgnoreOnDefault = false }
+            }
+        };
+        public static ComponentViewModel DropdownViewModel { get; } = new ComponentViewModel()
         {
             ControlName = "DropdownButton",
             ControlDisplayName = "DropdownButton",
@@ -232,15 +239,94 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             Moniker = KnownMonikers.ComboBoxItem,
             Properties = new OCP
             {
-                EnumOptionHelper.GetOptionsViewModel<ButtonSize>("Size"),
-                EnumOptionHelper.GetOptionsViewModel<ButtonType>("Type"),
-                new BP(){ PropertyName = "Danger" },
-                new BP(){ PropertyName = "Ghost" },
-                new BP(){ PropertyName = "Loading" }
+                EnumOptionHelper.GetOptionsViewModel<Placement>("Placement"),
+                new ContainsElementPropertyViewModel(){ PropertyName="Overlay", PropertyDisplayName="Overlay", DefaultValue = true, Value = true, IgnoreOnDefault = false },
+                new ContainsElementPropertyViewModel(){ PropertyName="ChildContent", PropertyDisplayName="ChildContent", DefaultValue = true, Value = true, IgnoreOnDefault = false },
+                new BP() { PropertyName = "IsButton" }
+            }
+        };
+        public static ComponentViewModel MenuViewModel { get; } = new ComponentViewModel()
+        {
+            ControlName = "Menu",
+            ControlDisplayName = "Menu",
+            DefaultMarkup = @"<Menu>
+  <MenuItem>Menu</MenuItem>
+  <SubMenu Title=""SubMenu"">
+    <MenuItem>SubMenuItem</MenuItem>
+  </SubMenu>
+</Menu>
+",
+            Moniker = KnownMonikers.MainMenuControl,
+            Properties = new OCP
+            {
+                EnumOptionHelper.GetOptionsViewModel<MenuMode>("Mode"),
+                EnumOptionHelper.GetOptionsViewModel<MenuTheme>("Theme"),
+                new IntegerOrIteratorPropertyViewModel(){ PropertyDisplayName = "Children", PropertyName = "Children", ChildrenTagName = "MenuItem"},
+                new BP{ PropertyName="InlineCollapsed" },
+                new BP{ PropertyName="Multiple" },
+                new BP{ PropertyName="Selectable" }
+            }
+        };
+        public static ComponentViewModel SubmenuViewModel { get; } = new ComponentViewModel()
+        {
+            ControlName = "SubMenu",
+            ControlDisplayName = "Menu - SubMenu",
+            DefaultMarkup = @"<SubMenu Key=""sub1"" Title=""Sub Menu"">
+     <MenuItem Key=""1"">Option 1</MenuItem>
+     <MenuItem Key=""2"">Option 2</MenuItem>
+     <MenuItem Key=""3"">Option 3</MenuItem>
+     <MenuItem Key=""4"">Option 4</MenuItem>
+</SubMenu>
+",
+            Moniker = KnownMonikers.MainMenuControl,
+            Properties = new OCP
+            {
+                new BP{ PropertyName="IsOpen" },
+                new BP{ PropertyName="Disabled" },
+                new SP{ PropertyName = "Key", IgnoreOnDefault = false },
+                new SP{ PropertyName = "Title", IgnoreOnDefault = false },
+            }
+        };
+        public static ComponentViewModel MenuItemViewModel { get; } = new ComponentViewModel()
+        {
+            ControlName = "SubMenu",
+            ControlDisplayName = "Menu - MenuItem",
+            DefaultMarkup = @"<MenuItem Key=""key"">SubMenuItem</MenuItem>
+",
+            Moniker = KnownMonikers.MainMenuControl,
+            Properties = new OCP
+            {
+                new BP{ PropertyName="Disabled" },
+                new SP{ PropertyName = "Key", IgnoreOnDefault = false},
+                new SP{ PropertyName = "Title", IgnoreOnDefault = false},
+                new SP{ PropertyName = "RouterLink" },
+                EnumOptionHelper.GetOptionsViewModel<NavLinkMatch>("RouterMatch"),
+            }
+        };
+        public static ComponentViewModel PaginationViewModel { get; } = new ComponentViewModel()
+        {
+            ControlName = "Pagination",
+            ControlDisplayName = "Pagination",
+            DefaultMarkup = @"<Pagination PageIndex=""1"" Total=""50""></Pagination>",
+            Moniker = KnownMonikers.DottedSplitter,
+            Properties = new OCP
+            {
+                new IntegerPropertyViewModel{ PropertyName="Current", PropertyDisplayName = "Current", DefaultValue = null, Value = null},
+                new IntegerPropertyViewModel{ PropertyName="DefaultCurrent", PropertyDisplayName = "Current", DefaultValue = 1, Value = 1},
+                new IntegerPropertyViewModel{ PropertyName="Current", PropertyDisplayName = "Current", DefaultValue = 10, Value = 10 },
+                new IntegerPropertyViewModel{ PropertyName="PageSize", PropertyDisplayName = "PageSize", DefaultValue = 50, Value = 50 },
+                new BP{ PropertyName = "Simple", PropertyDisplayName = "Simple" },
+                new BP{ PropertyName = "Disabled", PropertyDisplayName = "Disabled" },
+                new BP{ PropertyName = "HideOnSinglePage", PropertyDisplayName = "Hide On Single Page" },
+                new BP{ PropertyName = "ShowQuickJumper", PropertyDisplayName = "Show Quick Jumper" },
+                new BP{ PropertyName = "ShowSizeChanger", PropertyDisplayName = "Show Size Changer" },
+                new IntegerPropertyViewModel{ PropertyName="TotalBoundaryShowSizeChanger", PropertyDisplayName = "TotalBoundaryShowSizeChanger", DefaultValue = 50, Value = 50 },
+                new BP{ PropertyName = "ShowTitle", PropertyDisplayName = "Show Title" },
             }
         };
 
-        public static ComponentViewModel SampleViewModel = new ComponentViewModel()
+
+        private static ComponentViewModel SampleViewModel = new ComponentViewModel()
         {
             ControlName = "Sample",
             Moniker = KnownMonikers.SamplesFolder,
@@ -293,7 +379,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
     internal static class EnumOptionHelper
     {
-        public static StringOptionsViewModel GetOptionsViewModel<T>(string propertyName) where T: System.Enum
+        public static StringOptionsViewModel GetOptionsViewModel<T>(string propertyName, bool ignoreOnDefault = false) where T: System.Enum
         {
             IEnumerable<T> values = Enum.GetValues(typeof(T)).OfType<T>();
             var fields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
@@ -323,6 +409,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 DefaultValue = @default,
                 Options = new ObservableCollection<StringOptionItemViewModel>(list),
                 SelectedValue = @default,
+                IgnoreOnDefault = ignoreOnDefault,
             };
         }
     }

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace AntDesignToolbox.ToolWindows.ViewModels.EnumOptions
 {
-    internal enum ButtonSize
+    internal enum Size
     {
-        [StringValue("@ButtonSize.Default")]
+        [StringValue("@AntSizeLDSType.Default")]
         [Display(Name = "Default")]
         [Default]
         Default,
-        [StringValue("@ButtonSize.Large")]
+        [StringValue("@AntSizeLDSType.Large")]
         [Display(Name = "Large")]
         Large,
-        [StringValue("@ButtonSize.Small")]
+        [StringValue("@AntSizeLDSType.Small")]
         [Display(Name = "Small")]
         Small,
     }

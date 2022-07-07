@@ -40,20 +40,19 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         public ControlToolboxViewModel()
         {
-            var items = new List<TreeItemViewModel>()
+            var items = new List<TreeItemViewModel>();
+            var properties =typeof(ViewModelSourceHelper).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static );
+           foreach(var property in properties)
             {
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.ButtonViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.TextViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.TitleViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.ParagraphViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.DividerViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.SpaceViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.LayoutViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.BreadcrumbViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.PageHeaderViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.IconViewModel },
-                new TreeItemViewModel(){ Component = ViewModelSourceHelper.DropdownButtonViewModel }
-            };
+                if (property.PropertyType == typeof(ComponentViewModel))
+                {
+                    ComponentViewModel vm = property.GetValue(null) as ComponentViewModel;
+                    if (vm != null)
+                    {
+                        items.Add(new TreeItemViewModel() { Component = vm });
+                    }
+                }
+            }
 
             _allControls = items.OrderBy(a=>a.Component.ControlName).ToList();
 

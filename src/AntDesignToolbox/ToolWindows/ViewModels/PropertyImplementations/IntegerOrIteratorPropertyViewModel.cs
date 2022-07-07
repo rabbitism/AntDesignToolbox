@@ -28,6 +28,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             set { SetProperty(ref _iterate, value); }
         }
 
+        public override bool IsAttribute { get; set; } = false;
+
         public string ChildrenTagName { get; set; }
 
 
@@ -45,29 +47,25 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             Iterate = false;
         }
 
-        public override XAttribute ConvertToAttribute()
+        public override IEnumerable<XAttribute> ConvertToAttributes()
         {
             throw new NotImplementedException();
         }
 
-        public override XElement ConvertToElement()
+        public override IEnumerable<XNode> ConvertToNodes()
         {
-            XElement element = new XElement("PlaceHolder");
             if (Iterate)
             {
-                element.Add(new XText("\n@foreach (var item in collection)\n{\n"));
-                element.Add(new XElement(ChildrenTagName, ChildrenTagName));
-                element.Add(new XText("\n}\n"));
-                return element;
+                yield return new XText("\n@foreach (var item in collection)\n{\n");
+                yield return new XElement(ChildrenTagName, ChildrenTagName);
+                yield return new XText("\n}\n");
             }
             else
             {
-                for(int i = 0; i< Count; i++)
+                for (int i = 0; i < Count; i++)
                 {
-                    element.Add(new XElement(ChildrenTagName, ChildrenTagName));
+                    yield return new XElement(ChildrenTagName, ChildrenTagName);
                 }
-                element.EnsureNotEmpty();
-                return element;
             }
         }
     }

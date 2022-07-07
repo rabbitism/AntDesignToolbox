@@ -87,6 +87,29 @@
                       IsChecked="{Binding Value}" />
         </Grid>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ContainsElementPropertyViewModel}">
+        <Grid Margin="1" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MinWidth="100"
+                                  SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Padding="{StaticResource PropertyNamePadding}"
+                   Content="{Binding PropertyDisplayName}"
+                   ToolTip="{Binding PropertyDisplayName}">
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ResetCommand}" Header="Reset" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+            <CheckBox Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding Value}" />
+        </Grid>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:OptionsPropertyViewModel}">
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>

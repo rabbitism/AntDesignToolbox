@@ -36,16 +36,16 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
             ResetCommand = new DelegateCommand(() => { SelectedValue = DefaultValue; });
         }
 
-        public override XAttribute ConvertToAttribute()
+        public override IEnumerable<XAttribute> ConvertToAttributes()
         {
             if(IgnoreOnDefault && SelectedValue == DefaultValue)
             {
-                return null;
+                yield break;
             }
-            return new XAttribute(PropertyName, SelectedValue ?? string.Empty);
+            yield return new XAttribute(PropertyName, SelectedValue ?? string.Empty);
         }
 
-        public override XElement ConvertToElement()
+        public override IEnumerable<XNode> ConvertToNodes()
         {
             throw new NotImplementedException();
         }
