@@ -18,7 +18,14 @@
              toolkit:Themes.UseVsTheme="True"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <ResourceDictionary Source="../Styles/StyleUtilities.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/StyleUtilities.xaml" />
+                <ResourceDictionary Source="../Styles/GridStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

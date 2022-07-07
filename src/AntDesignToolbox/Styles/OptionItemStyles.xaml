@@ -6,18 +6,18 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="./StyleUtilities.xaml" />
         <ResourceDictionary Source="./LabelStyles.xaml" />
+        <ResourceDictionary Source="./GridStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
     <DataTemplate DataType="{x:Type vm:StringPropertyViewModel}">
-        <Grid MinHeight="20"
-              Margin="1"
-              HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
                                   SharedSizeGroup="PropertyName" />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
@@ -30,7 +30,11 @@
                     </ContextMenu>
                 </Label.ContextMenu>
             </Label>
-            <TextBox Grid.Column="1"
+            <GridSplitter Grid.Row="1"
+                          Width="2"
+                          VerticalAlignment="Stretch"
+                          Background="Transparent" />
+            <TextBox Grid.Column="2"
                      Padding="{StaticResource DefaultPadding}"
                      VerticalAlignment="Stretch"
                      VerticalContentAlignment="Center"
@@ -38,9 +42,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:IntegerPropertyViewModel}">
-        <Grid MinHeight="20"
-              Margin="1"
-              HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -65,7 +67,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:BooleanPropertyViewModel}">
-        <Grid Margin="1" HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -88,7 +90,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ContainsElementPropertyViewModel}">
-        <Grid Margin="1" HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -111,7 +113,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:OptionsPropertyViewModel}">
-        <Grid HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -137,7 +139,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:IntegerOrIteratorPropertyViewModel}">
-        <Grid Margin="1" HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -177,7 +179,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:StringOptionsViewModel}">
-        <Grid HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"
@@ -208,7 +210,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:IconTypePropertyViewModel}">
-        <Grid HorizontalAlignment="Stretch">
+        <Grid Style="{StaticResource DefaultPropertyItemGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"
                                   MinWidth="100"

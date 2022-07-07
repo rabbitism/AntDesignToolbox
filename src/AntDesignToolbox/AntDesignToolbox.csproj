@@ -208,6 +208,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\GridStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\LabelStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
