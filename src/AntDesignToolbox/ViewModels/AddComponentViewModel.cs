@@ -67,6 +67,7 @@ namespace AntDesignToolbox.ViewModels
             }
             _solutionItem = solutionItems.First();
             var ns = await ProjectHelper.GetNamespaceAsync(_solutionItem);
+            
             _rootNamespace = ns;
             var path = ProjectHelper.GetContainingFolder(_solutionItem);
             _rootPath = path.FullName;

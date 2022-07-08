@@ -191,12 +191,19 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 new ContainsElementPropertyViewModel{ PropertyDisplayName = "Avatar",PropertyName="PageHeaderAvatar", IsAttribute =false },
             }
         };
-        public static ComponentViewModel IconViewModel { get; } = new IconComponentViewModel()
+        public static ComponentViewModel IconViewModel { get; } = new ComponentViewModel()
         {
             ControlName= "Icon",
             ControlDisplayName = "Icon",
             DefaultMarkup = @"<Icon Type=""ant-design"" Theme=""outline""/>",
             Moniker = KnownMonikers.ImageIcon,
+            Properties = new OCP
+            {
+                new IconTypePropertyViewModel() { PropertyName = "IconProperty" },
+                new BP() { PropertyName = "Spin" },
+                new IntegerPropertyViewModel() { PropertyName="Rotate" },
+                new SP() { PropertyName = "TwoToneColor" }
+            }
         };
         public static ComponentViewModel DropdownButtonViewModel { get; } = new ComponentViewModel()
         {
@@ -225,16 +232,16 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         };
         public static ComponentViewModel DropdownViewModel { get; } = new ComponentViewModel()
         {
-            ControlName = "DropdownButton",
-            ControlDisplayName = "DropdownButton",
-            DefaultMarkup = @"<DropdownButton>
+            ControlName = "Dropdown",
+            ControlDisplayName = "Dropdown",
+            DefaultMarkup = @"<Dropdown>
     <Overlay>
         
     </Overlay>
     <ChildContent>
         
     </ChildContent>
-</DropdownButton>"
+</Dropdown>"
 ,
             Moniker = KnownMonikers.ComboBoxItem,
             Properties = new OCP
@@ -326,7 +333,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
         };
 
 
-        private static ComponentViewModel SampleViewModel = new ComponentViewModel()
+        private static readonly ComponentViewModel SampleViewModel = new()
         {
             ControlName = "Sample",
             Moniker = KnownMonikers.SamplesFolder,
@@ -343,7 +350,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
     internal static class DefaultViewModelSourceHelper
     {
-        public static ComponentViewModel Div = new ComponentViewModel()
+        public static ComponentViewModel Div = new()
         {
             ControlName = "<div>",
             Moniker = KnownMonikers.None,
@@ -353,21 +360,21 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 </div>
 ",
         };
-        public static ComponentViewModel If = new ComponentViewModel()
+        public static ComponentViewModel If = new()
         {
             ControlName = "@if",
             Moniker = KnownMonikers.None,
             AlwaysDefault = true,
             DefaultMarkup = "\n@if( true )\n{\n\n}\n",
         };
-        public static ComponentViewModel Foreach = new ComponentViewModel()
+        public static ComponentViewModel Foreach = new()
         {
             ControlName = "@foreach",
             Moniker = KnownMonikers.None,
             AlwaysDefault = true,
             DefaultMarkup = "\n@foreach(var item in collection)\n{\n\n}\n",
         };
-        public static ComponentViewModel CodeBlock = new ComponentViewModel()
+        public static ComponentViewModel CodeBlock = new()
         {
             ControlName = "@code",
             Moniker = KnownMonikers.None,
@@ -381,9 +388,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
     {
         public static StringOptionsViewModel GetOptionsViewModel<T>(string propertyName, bool ignoreOnDefault = false) where T: System.Enum
         {
-            IEnumerable<T> values = Enum.GetValues(typeof(T)).OfType<T>();
             var fields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-            List<StringOptionItemViewModel> list = new List<StringOptionItemViewModel>();
+            List<StringOptionItemViewModel> list = new();
             StringOptionItemViewModel @default = null;
             foreach(var field in fields)
             {
@@ -392,7 +398,7 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
                 var stringValue = field.GetCustomAttributes<StringValueAttribute>(false).FirstOrDefault()?.StringValue ?? fieldName;
                 var display = field.GetCustomAttributes<DisplayAttribute>(false).FirstOrDefault()?.Name ?? fieldName;
                 var isDefault = field.GetCustomAttributes<DefaultAttribute>(false).FirstOrDefault()?.IsDefault ?? false;
-                StringOptionItemViewModel vm = new StringOptionItemViewModel(display, stringValue);
+                StringOptionItemViewModel vm = new(display, stringValue);
                 if(@default is null && isDefault)
                 {
                     @default = vm;

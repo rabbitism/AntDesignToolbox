@@ -28,13 +28,8 @@ namespace AntDesignToolbox.ToolWindows.ViewModels
 
         public ContainsElementPropertyViewModel()
         {
-            ResetCommand = new DelegateCommand(Reset);
+            ResetCommand = new DelegateCommand(() => { Value = DefaultValue; });
             Value = false;
-        }
-
-        private void Reset()
-        {
-            Value = DefaultValue;
         }
 
         public override IEnumerable<XAttribute> ConvertToAttributes()

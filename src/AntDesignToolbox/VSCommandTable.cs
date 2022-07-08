@@ -22,9 +22,13 @@ namespace AntDesignToolbox
     {
         public const int ControlToolboxCommand = 0x0100;
         public const int AddComponentCommand = 0x0101;
+        public const int WrapInDivisionCommand = 0x0102;
         public const int AntDesignMenu = 0x0001;
         public const int AntDesignMenuGroup = 0x0002;
         public const int FolderContextMenuGroup = 0x0003;
         public const int FolderContextMenu = 0x0004;
+        public const int EditorContextMenuGroup = 0x0005;
+        public const int EditorContextMenu = 0x0006;
+        public const int EditorContextMenuMainGroup = 0x0007;
     }
 }

@@ -14,6 +14,12 @@
 			<Group guid="AntDesignToolbox" id="FolderContextMenuGroup">
 				<Parent guid="AntDesignToolbox" id="FolderContextMenu"/>
 			</Group>
+			<Group guid="AntDesignToolbox" id="EditorContextMenuGroup">
+				<Parent guid="AntDesignToolbox" id="EditorContextMenu"/>
+			</Group>
+			<Group guid="AntDesignToolbox" id="EditorContextMenuMainGroup" priority="0x0003">
+				<Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+			</Group>
 		</Groups>
 		
 
@@ -30,11 +36,16 @@
 					<ButtonText>Ant Design Blazor</ButtonText>
 				</Strings>
 			</Menu>
+			<Menu guid="AntDesignToolbox" id="EditorContextMenu" priority="0x0002">
+				<Parent guid="AntDesignToolbox" id="EditorContextMenuMainGroup"/>
+				<Strings>
+					<ButtonText>Ant Design Blazor</ButtonText>
+				</Strings>
+			</Menu>
 		</Menus>
 		<!--This section defines the elements the user can interact with, like a menu command or a button or combo box in a toolbar. -->
 		<Buttons>
 			<Button guid="AntDesignToolbox" id="ControlToolboxCommand" priority="0x0100" type="Button">
-				<Parent guid="AntDesignToolbox" id="AntDesignMenuGroup"/>
 				<Icon guid="ImageCatalogGuid" id="ToolWindow" />
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<Strings>
@@ -49,13 +60,26 @@
 					<ButtonText>Add Razor Component</ButtonText>
 				</Strings>
 			</Button>
+			<Button guid="AntDesignToolbox" id="WrapInDivisionCommand" type="Button">
+				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<Strings>
+					<ButtonText>Wrap in div</ButtonText>
+				</Strings>
+			</Button>
 		</Buttons>
 		
 	</Commands>
 
 	<CommandPlacements>
-		<CommandPlacement guid="AntDesignToolbox" id="AddComponentCommand">
+		<CommandPlacement guid="AntDesignToolbox" id="AddComponentCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="FolderContextMenuGroup"/>
+		</CommandPlacement>
+		<CommandPlacement guid="AntDesignToolbox" id="ControlToolboxCommand" priority="0x0100">
+			<Parent guid="AntDesignToolbox" id="AntDesignMenuGroup"/>
+		</CommandPlacement>
+		<CommandPlacement guid="AntDesignToolbox" id="WrapInDivisionCommand" priority="0x0100">
+			<Parent guid="AntDesignToolbox" id="EditorContextMenuGroup"/>
 		</CommandPlacement>
 	</CommandPlacements>
 	
@@ -63,10 +87,18 @@
 		<GuidSymbol name="AntDesignToolbox" value="{ebd88e56-07f7-48b1-b706-49ce325a3002}">
 			<IDSymbol name="ControlToolboxCommand" value="0x0100" />
 			<IDSymbol name="AddComponentCommand" value="0x0101"/>
+			<IDSymbol name="WrapInDivisionCommand" value="0x0102"/>
+			
 			<IDSymbol name="AntDesignMenu" value="0x0001"/>
 			<IDSymbol name="AntDesignMenuGroup" value="0x0002"/>
+			
 			<IDSymbol name="FolderContextMenuGroup" value="0x0003"/>
 			<IDSymbol name="FolderContextMenu" value="0x0004"/>
+
+			
+			<IDSymbol name="EditorContextMenuGroup" value="0x0005"/>
+			<IDSymbol name="EditorContextMenu" value="0x0006"/>
+			<IDSymbol name="EditorContextMenuMainGroup" value="0x0007"/>
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

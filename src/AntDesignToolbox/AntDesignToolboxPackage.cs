@@ -13,6 +13,7 @@ namespace AntDesignToolbox
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
     [ProvideToolWindow(typeof(ControlToolboxWindow.Pane), Style = VsDockStyle.Tabbed, Window = WindowGuids.Toolbox)]
+    [ProvideToolWindowVisibility(typeof(ControlToolboxWindow), VSConstants.UICONTEXT.SolutionExists_string)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.AntDesignToolboxString)]
     public sealed class AntDesignToolboxPackage : ToolkitPackage
