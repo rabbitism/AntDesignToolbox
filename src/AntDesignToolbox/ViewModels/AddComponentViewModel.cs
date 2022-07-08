@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace AntDesignToolbox.ViewModels
 {
@@ -42,6 +43,25 @@ namespace AntDesignToolbox.ViewModels
             set { SetProperty(ref _css, value); }
         }
 
+        private string _selectedFlavor;
+
+        public string SelectedFlavor
+        {
+            get { return _selectedFlavor; }
+            set { _selectedFlavor = value; }
+        }
+
+        private ObservableCollection<string> _flavors;
+
+        public ObservableCollection<string> Flavors
+        {
+            get { return _flavors; }
+            set { _flavors = value; }
+        }
+
+
+
+
         #endregion Properties
 
         #region Commands
@@ -54,6 +74,8 @@ namespace AntDesignToolbox.ViewModels
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             ThreadHelper.JoinableTaskFactory.Run(InitializeAsync);
+            Flavors = new ObservableCollection<string>() { "CSS", "LESS", "SCSS" };
+            SelectedFlavor = Flavors[0];
             AddCommand = new DelegateCommand(() => ThreadHelper.JoinableTaskFactory.Run(OnAddAsync), CanAdd);
         }
 
@@ -84,7 +106,7 @@ namespace AntDesignToolbox.ViewModels
                 }
                 if (Css)
                 {
-                    await AddWithTemplateAsync(new CssTemplate(), "razor.css");
+                    await AddWithTemplateAsync(new CssTemplate(), $"razor.{SelectedFlavor.ToLower()}");
                 }
             }
             catch(Exception ex)

@@ -46,15 +46,27 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Code Behind" />
-            <Label Grid.Row="1" Content="CSS" />
+            <Label Grid.Row="1" Content="Style Sheet" />
             <CheckBox Grid.Row="0"
                       Grid.Column="1"
                       VerticalAlignment="Center"
                       IsChecked="{Binding CodeBehind}" />
-            <CheckBox Grid.Row="1"
-                      Grid.Column="1"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding Css}" />
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <CheckBox Grid.Row="1"
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          IsChecked="{Binding Css}" />
+                <ComboBox Width="100"
+                          Margin="24,0,0,0"
+                          Padding="8,2"
+                          VerticalAlignment="Center"
+                          IsEnabled="{Binding Css}"
+                          ItemsSource="{Binding Flavors}"
+                          SelectedItem="{Binding SelectedFlavor}" />
+            </StackPanel>
         </Grid>
     </StackPanel>
 </Window>

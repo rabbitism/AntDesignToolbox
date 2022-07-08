@@ -1,0 +1,62 @@
+﻿<Window x:Class="AntDesignToolbox.Views.CreateCodeBehindWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:AntDesignToolbox.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:AntDesignToolbox.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
+        xmlns:vm="clr-namespace:AntDesignToolbox.ViewModels"
+        Title="Create Code Behind"
+        Width="400"
+        d:DataContext="{d:DesignInstance Type={x:Type vm:CreateCodeBehindViewModel}}"
+        toolkit:Themes.UseVsTheme="True"
+        SizeToContent="Height"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <converters:BooleanToHiddenConverter x:Key="Hidden" />
+    </Window.Resources>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MinWidth="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Code Behind" />
+        <Label Grid.Row="1" Content="Style Sheet" />
+        <CheckBox Grid.Row="0"
+                  Grid.Column="1"
+                  VerticalAlignment="Center"
+                  IsChecked="{Binding CodeBehind}" />
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <CheckBox Grid.Row="1"
+                      Grid.Column="1"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding StyleSheet}" />
+            <ComboBox Width="100"
+                      Margin="24,0,0,0"
+                      Padding="8,2"
+                      VerticalAlignment="Center"
+                      IsEnabled="{Binding StyleSheet}"
+                      ItemsSource="{Binding Flavors}"
+                      SelectedItem="{Binding SelectedFlavor}" />
+        </StackPanel>
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Margin="0,16,0,0"
+                Padding="32,4"
+                HorizontalAlignment="Right"
+                Command="{Binding AddCommand}">
+            ADD
+        </Button>
+    </Grid>
+</Window>

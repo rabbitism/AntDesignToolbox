@@ -52,11 +52,13 @@
     <Compile Include="AntDesignToolboxPackage.cs" />
     <Compile Include="Commands\AddComponentCommand.cs" />
     <Compile Include="Commands\ControlToolboxCommand.cs" />
+    <Compile Include="Commands\CreateCodeBehindCommand.cs" />
     <Compile Include="Commands\WrapInDivisionCommand.cs" />
     <Compile Include="Commons\FileHelper.cs" />
     <Compile Include="Commons\ProjectHelper.cs" />
     <Compile Include="Commons\ViewModelHelper.cs" />
     <Compile Include="Commons\XmlHelpers.cs" />
+    <Compile Include="Converters\BooleanToHiddenConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -124,8 +126,12 @@
     <Compile Include="ToolWindows\ViewModels\TreeItemViewModel.cs" />
     <Compile Include="ToolWindows\ViewModels\ViewModelSourceHelper.cs" />
     <Compile Include="ViewModels\AddComponentViewModel.cs" />
+    <Compile Include="ViewModels\CreateCodeBehindViewModel.cs" />
     <Compile Include="Views\AddComponentWindow.xaml.cs">
       <DependentUpon>AddComponentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateCodeBehindWindow.xaml.cs">
+      <DependentUpon>CreateCodeBehindWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
@@ -237,6 +243,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddComponentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateCodeBehindWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

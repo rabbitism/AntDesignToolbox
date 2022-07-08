@@ -20,6 +20,9 @@
 			<Group guid="AntDesignToolbox" id="EditorContextMenuMainGroup" priority="0x0003">
 				<Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
 			</Group>
+			<Group guid="AntDesignToolbox" id="ItemNodeContextMenuGroup" priority="0x0003">
+				<Parent guid="AntDesignToolbox" id="ItemNodeContextMenu"/>
+			</Group>
 		</Groups>
 		
 
@@ -38,6 +41,12 @@
 			</Menu>
 			<Menu guid="AntDesignToolbox" id="EditorContextMenu" priority="0x0002">
 				<Parent guid="AntDesignToolbox" id="EditorContextMenuMainGroup"/>
+				<Strings>
+					<ButtonText>Ant Design Blazor</ButtonText>
+				</Strings>
+			</Menu>
+			<Menu guid="AntDesignToolbox" id="ItemNodeContextMenu" priority="0x0002">
+				<Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_OPEN"/>
 				<Strings>
 					<ButtonText>Ant Design Blazor</ButtonText>
 				</Strings>
@@ -63,8 +72,17 @@
 			<Button guid="AntDesignToolbox" id="WrapInDivisionCommand" type="Button">
 				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
 				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>DynamicVisibility</CommandFlag>
 				<Strings>
-					<ButtonText>Wrap in div</ButtonText>
+					<ButtonText>Wrap In &lt;div&gt;</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="AntDesignToolbox" id="CreateCodeBehindCommand" type="Button">
+				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>DynamicVisibility</CommandFlag>
+				<Strings>
+					<ButtonText>Create Code Behind</ButtonText>
 				</Strings>
 			</Button>
 		</Buttons>
@@ -81,6 +99,9 @@
 		<CommandPlacement guid="AntDesignToolbox" id="WrapInDivisionCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="EditorContextMenuGroup"/>
 		</CommandPlacement>
+		<CommandPlacement guid="AntDesignToolbox" id="CreateCodeBehindCommand" priority="0x0100">
+			<Parent guid="AntDesignToolbox" id="ItemNodeContextMenuGroup"/>
+		</CommandPlacement>
 	</CommandPlacements>
 	
 	<Symbols>
@@ -88,6 +109,7 @@
 			<IDSymbol name="ControlToolboxCommand" value="0x0100" />
 			<IDSymbol name="AddComponentCommand" value="0x0101"/>
 			<IDSymbol name="WrapInDivisionCommand" value="0x0102"/>
+			<IDSymbol name="CreateCodeBehindCommand" value="0x0103"/>
 			
 			<IDSymbol name="AntDesignMenu" value="0x0001"/>
 			<IDSymbol name="AntDesignMenuGroup" value="0x0002"/>
@@ -99,6 +121,9 @@
 			<IDSymbol name="EditorContextMenuGroup" value="0x0005"/>
 			<IDSymbol name="EditorContextMenu" value="0x0006"/>
 			<IDSymbol name="EditorContextMenuMainGroup" value="0x0007"/>
+
+			<IDSymbol name="ItemNodeContextMenuGroup" value="0x0008"/>
+			<IDSymbol name="ItemNodeContextMenu" value="0x0009"/>
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>
