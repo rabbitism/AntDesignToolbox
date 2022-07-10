@@ -128,11 +128,15 @@
     <Compile Include="ToolWindows\ViewModels\ViewModelSourceHelper.cs" />
     <Compile Include="ViewModels\AddComponentViewModel.cs" />
     <Compile Include="ViewModels\CreateCodeBehindViewModel.cs" />
+    <Compile Include="ViewModels\SurroundWithTagViewModel.cs" />
     <Compile Include="Views\AddComponentWindow.xaml.cs">
       <DependentUpon>AddComponentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateCodeBehindWindow.xaml.cs">
       <DependentUpon>CreateCodeBehindWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SurroundWithTagWindow.xaml.cs">
+      <DependentUpon>SurroundWithTagWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
@@ -257,6 +261,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateCodeBehindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SurroundWithTagWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

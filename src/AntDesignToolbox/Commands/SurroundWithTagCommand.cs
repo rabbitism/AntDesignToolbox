@@ -1,4 +1,5 @@
-﻿using EnvDTE;
+﻿using AntDesignToolbox.Views;
+using EnvDTE;
 using Microsoft.VisualStudio.Threading;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace AntDesignToolbox
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {
-            Execute();
+            //Execute();
+            await VS.Windows.ShowDialogAsync(new SurroundWithTagWindow());
         }
 
         protected override void BeforeQueryStatus(EventArgs e)
