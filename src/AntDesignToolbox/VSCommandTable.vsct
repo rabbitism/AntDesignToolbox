@@ -69,12 +69,12 @@
 					<ButtonText>Add Razor Component</ButtonText>
 				</Strings>
 			</Button>
-			<Button guid="AntDesignToolbox" id="WrapInDivisionCommand" type="Button">
+			<Button guid="AntDesignToolbox" id="SurroundWithTagCommand" type="Button">
 				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>DynamicVisibility</CommandFlag>
 				<Strings>
-					<ButtonText>Wrap In &lt;div&gt;</ButtonText>
+					<ButtonText>Surround With Tag</ButtonText>
 				</Strings>
 			</Button>
 			<Button guid="AntDesignToolbox" id="CreateCodeBehindCommand" type="Button">
@@ -85,6 +85,14 @@
 					<ButtonText>Create Code Behind</ButtonText>
 				</Strings>
 			</Button>
+			<Button guid="AntDesignToolbox" id="AddCrudPageCommand" type="Button">
+				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>DynamicVisibility</CommandFlag>
+				<Strings>
+					<ButtonText>Add CRUD Page</ButtonText>
+				</Strings>
+			</Button>
 		</Buttons>
 		
 	</Commands>
@@ -93,23 +101,28 @@
 		<CommandPlacement guid="AntDesignToolbox" id="AddComponentCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="FolderContextMenuGroup"/>
 		</CommandPlacement>
+		<CommandPlacement guid="AntDesignToolbox" id="AddCrudPageCommand" priority="0x0100">
+			<Parent guid="AntDesignToolbox" id="FolderContextMenuGroup"/>
+		</CommandPlacement>
 		<CommandPlacement guid="AntDesignToolbox" id="ControlToolboxCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="AntDesignMenuGroup"/>
 		</CommandPlacement>
-		<CommandPlacement guid="AntDesignToolbox" id="WrapInDivisionCommand" priority="0x0100">
+		<CommandPlacement guid="AntDesignToolbox" id="SurroundWithTagCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="EditorContextMenuGroup"/>
 		</CommandPlacement>
 		<CommandPlacement guid="AntDesignToolbox" id="CreateCodeBehindCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="ItemNodeContextMenuGroup"/>
 		</CommandPlacement>
+
 	</CommandPlacements>
 	
 	<Symbols>
 		<GuidSymbol name="AntDesignToolbox" value="{ebd88e56-07f7-48b1-b706-49ce325a3002}">
 			<IDSymbol name="ControlToolboxCommand" value="0x0100" />
 			<IDSymbol name="AddComponentCommand" value="0x0101"/>
-			<IDSymbol name="WrapInDivisionCommand" value="0x0102"/>
+			<IDSymbol name="SurroundWithTagCommand" value="0x0102"/>
 			<IDSymbol name="CreateCodeBehindCommand" value="0x0103"/>
+			<IDSymbol name="AddCrudPageCommand" value="0x0104"/>
 			
 			<IDSymbol name="AntDesignMenu" value="0x0001"/>
 			<IDSymbol name="AntDesignMenuGroup" value="0x0002"/>

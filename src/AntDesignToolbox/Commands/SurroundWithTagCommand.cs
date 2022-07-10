@@ -5,8 +5,8 @@ using System.Text;
 
 namespace AntDesignToolbox
 {
-    [Command(PackageGuids.AntDesignToolboxString, PackageIds.WrapInDivisionCommand)]
-    internal sealed class WrapInDivisionCommand : BaseCommand<WrapInDivisionCommand>
+    [Command(PackageGuids.AntDesignToolboxString, PackageIds.SurroundWithTagCommand)]
+    internal sealed class SurroundWithTagCommand : BaseCommand<SurroundWithTagCommand>
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {

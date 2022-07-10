@@ -51,9 +51,10 @@
   <ItemGroup>
     <Compile Include="AntDesignToolboxPackage.cs" />
     <Compile Include="Commands\AddComponentCommand.cs" />
+    <Compile Include="Commands\AddCrudPageCommand.cs" />
     <Compile Include="Commands\ControlToolboxCommand.cs" />
     <Compile Include="Commands\CreateCodeBehindCommand.cs" />
-    <Compile Include="Commands\WrapInDivisionCommand.cs" />
+    <Compile Include="Commands\SurroundWithTagCommand.cs" />
     <Compile Include="Commons\FileHelper.cs" />
     <Compile Include="Commons\ProjectHelper.cs" />
     <Compile Include="Commons\ViewModelHelper.cs" />
