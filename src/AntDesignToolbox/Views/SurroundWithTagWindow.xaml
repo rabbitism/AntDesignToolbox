@@ -6,12 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
         xmlns:vm="clr-namespace:AntDesignToolbox.ViewModels"
-        Title="SurroundWithTagWindow"
-        Width="600"
-        MinHeight="400"
+        Title="Surround With Tag"
+        Width="300"
         d:DataContext="{d:DesignInstance Type={x:Type vm:SurroundWithTagViewModel}}"
         toolkit:Themes.UseVsTheme="True"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
         SizeToContent="Height"
         mc:Ignorable="d">
     <Window.Resources>
@@ -22,43 +21,14 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" MinWidth="150" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.ColumnSpan="2" Margin="0,0,0,8">
-            <Label VerticalAlignment="Center"
-                   Content="Surround with: "
-                   DockPanel.Dock="Left" />
-            <TextBox Grid.Row="0"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="2"
-                     VerticalAlignment="Stretch"
-                     FontSize="16"
-                     Style="{StaticResource FileInputTextboxStyle}" />
-        </DockPanel>
-        <ListView Grid.Row="1" ItemsSource="{Binding Tags}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Label Padding="4,2" Content="{Binding TagName}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="MinHeight" Value="0" />
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
-        <StackPanel Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="16">
-            <TextBlock>Text 1</TextBlock>
-            <TextBlock>Text 2</TextBlock>
-        </StackPanel>
+        <TextBox x:Name="textBox"
+                 Grid.Row="0"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="2"
+                 Margin="16"
+                 VerticalAlignment="Stretch"
+                 KeyUp="TextBox_KeyUp"
+                 Style="{StaticResource FileInputTextboxStyle}"
+                 Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </Window>

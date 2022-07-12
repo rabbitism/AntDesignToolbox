@@ -16,30 +16,21 @@ using System.Windows.Shapes;
 namespace AntDesignToolbox.Views
 {
     /// <summary>
-    /// Interaction logic for SurroundWithTagWindow.xaml
+    /// Interaction logic for SurroundWithComponentWindow.xaml
     /// </summary>
-    public partial class SurroundWithTagWindow : Window
+    public partial class SurroundWithComponentWindow : Window
     {
-        public SurroundWithTagWindow()
+        public SurroundWithComponentWindow()
         {
             InitializeComponent();
-            var vm = new SurroundWithTagViewModel();
+            var vm = new SurroundWithComponentViewModel();
             vm.OnCreateSucceedEventHandler += Vm_OnCreateSucceedEventHandler;
             this.DataContext = vm;
-            textBox.Focus();
         }
 
         private void Vm_OnCreateSucceedEventHandler(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private async void TextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter && this.DataContext is SurroundWithTagViewModel vm)
-            {
-                await vm.GenerateAsync();
-            }
         }
     }
 }

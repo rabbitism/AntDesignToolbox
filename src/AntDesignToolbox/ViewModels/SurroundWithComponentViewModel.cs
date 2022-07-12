@@ -4,33 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Prism.Commands;
+using System.Collections.ObjectModel;
 using EnvDTE;
 
 namespace AntDesignToolbox.ViewModels
 {
-    public class SurroundWithTagViewModel: BindableBase
+    internal class SurroundWithComponentViewModel: BindableBase
     {
         public event EventHandler OnCreateSucceedEventHandler;
-        public DelegateCommand GenerateCommand { get; set; }
 
-        private string _text;
-        public string Text { get => _text; set => SetProperty(ref _text, value); }
+        private ComponentItem _selectedComponent;
+        public ComponentItem SelectedComponent { get => _selectedComponent; set => SetProperty(ref _selectedComponent, value); }
 
-        public SurroundWithTagViewModel()
+        private ObservableCollection<ComponentItem> _components;
+        public ObservableCollection<ComponentItem> Components { get => _components; set => SetProperty(ref _components, value); }
+
+        public DelegateCommand ConfirmCommand { get; set; } 
+
+        public SurroundWithComponentViewModel()
         {
-            GenerateCommand = new DelegateCommand(()=>ThreadHelper.JoinableTaskFactory.Run(GenerateAsync));
+            InitializeComponents();
+            ConfirmCommand = new DelegateCommand(() => { ThreadHelper.JoinableTaskFactory.Run(GenerateAsync); });
         }
 
+        private void InitializeComponents()
+        {
+            Components = new ObservableCollection<ComponentItem>()
+            {
+                new ComponentItem{ ComponentName = "CascadingValue", OpenTag = "<CascadingValue TValue=\"object\">", CloseTag = "</CascadingValue>" },
+            };
+        }
 
-        
+        private bool CanGenerate()
+        {
+            return SelectedComponent != null;
+        }
+
         public async Task GenerateAsync()
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             var activeDocument = AntDesignToolboxPackage.DTE.ActiveDocument.Object("TextDocument") as TextDocument;
-            
+
             TextSelection selection = activeDocument.Selection;
             var text = selection.Text;
             var lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
@@ -86,7 +101,7 @@ namespace AntDesignToolbox.ViewModels
             string indent = tuple.Item1 == ' ' ? "    " : "\t";
             string divIndent = new string(Enumerable.Repeat(tuple.Item1, tuple.Item2).ToArray());
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(divIndent + $"<{Text}>");
+            builder.AppendLine(divIndent + SelectedComponent.OpenTag);
             foreach (var line in lines)
             {
                 if (line.Length == 0)
@@ -98,8 +113,18 @@ namespace AntDesignToolbox.ViewModels
                     builder.AppendLine(indent + line);
                 }
             }
-            builder.AppendLine(divIndent + $"</{Text}>");
+            builder.AppendLine(divIndent + SelectedComponent.CloseTag);
             return builder.ToString();
         }
+
+    }
+
+    internal class ComponentItem: BindableBase
+    {
+        private string _componentName;
+        public string ComponentName { get => _componentName; set => SetProperty(ref _componentName, value); }
+
+        public string OpenTag { get; set; }
+        public string CloseTag { get; set; } 
     }
 }

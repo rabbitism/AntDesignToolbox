@@ -93,6 +93,14 @@
 					<ButtonText>Add CRUD Page</ButtonText>
 				</Strings>
 			</Button>
+			<Button guid="AntDesignToolbox" id="SurroundWithComponentCommand" type="Button">
+				<Icon guid="ImageCatalogGuid" id="CSRazorFile"/>
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>DynamicVisibility</CommandFlag>
+				<Strings>
+					<ButtonText>Surround With Component</ButtonText>
+				</Strings>
+			</Button>
 		</Buttons>
 		
 	</Commands>
@@ -110,11 +118,18 @@
 		<CommandPlacement guid="AntDesignToolbox" id="SurroundWithTagCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="EditorContextMenuGroup"/>
 		</CommandPlacement>
+		<CommandPlacement guid="AntDesignToolbox" id="SurroundWithComponentCommand" priority="0x0100">
+			<Parent guid="AntDesignToolbox" id="EditorContextMenuGroup"/>
+		</CommandPlacement>
 		<CommandPlacement guid="AntDesignToolbox" id="CreateCodeBehindCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="ItemNodeContextMenuGroup"/>
 		</CommandPlacement>
 
 	</CommandPlacements>
+
+	<KeyBindings>
+		<KeyBinding guid="AntDesignToolbox" id="SurroundWithTagCommand" editor="guidVSStd97" key1="U" mod1="Alt" key2="U" />
+	</KeyBindings>
 	
 	<Symbols>
 		<GuidSymbol name="AntDesignToolbox" value="{ebd88e56-07f7-48b1-b706-49ce325a3002}">
@@ -123,6 +138,7 @@
 			<IDSymbol name="SurroundWithTagCommand" value="0x0102"/>
 			<IDSymbol name="CreateCodeBehindCommand" value="0x0103"/>
 			<IDSymbol name="AddCrudPageCommand" value="0x0104"/>
+			<IDSymbol name="SurroundWithComponentCommand" value="0x0105"/>
 			
 			<IDSymbol name="AntDesignMenu" value="0x0001"/>
 			<IDSymbol name="AntDesignMenuGroup" value="0x0002"/>

@@ -54,6 +54,7 @@
     <Compile Include="Commands\AddCrudPageCommand.cs" />
     <Compile Include="Commands\ControlToolboxCommand.cs" />
     <Compile Include="Commands\CreateCodeBehindCommand.cs" />
+    <Compile Include="Commands\SurroundWithComponentCommand.cs" />
     <Compile Include="Commands\SurroundWithTagCommand.cs" />
     <Compile Include="Commons\FileHelper.cs" />
     <Compile Include="Commons\ProjectHelper.cs" />
@@ -128,12 +129,16 @@
     <Compile Include="ToolWindows\ViewModels\ViewModelSourceHelper.cs" />
     <Compile Include="ViewModels\AddComponentViewModel.cs" />
     <Compile Include="ViewModels\CreateCodeBehindViewModel.cs" />
+    <Compile Include="ViewModels\SurroundWithComponentViewModel.cs" />
     <Compile Include="ViewModels\SurroundWithTagViewModel.cs" />
     <Compile Include="Views\AddComponentWindow.xaml.cs">
       <DependentUpon>AddComponentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateCodeBehindWindow.xaml.cs">
       <DependentUpon>CreateCodeBehindWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SurroundWithComponentWindow.xaml.cs">
+      <DependentUpon>SurroundWithComponentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SurroundWithTagWindow.xaml.cs">
       <DependentUpon>SurroundWithTagWindow.xaml</DependentUpon>
@@ -261,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateCodeBehindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SurroundWithComponentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
