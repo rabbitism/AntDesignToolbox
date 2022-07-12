@@ -1,0 +1,34 @@
+﻿<Window x:Class="AntDesignToolbox.Views.SurroundWithTagWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:AntDesignToolbox.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
+        xmlns:vm="clr-namespace:AntDesignToolbox.ViewModels"
+        Title="Surround With Tag"
+        Width="300"
+        d:DataContext="{d:DesignInstance Type={x:Type vm:SurroundWithTagViewModel}}"
+        toolkit:Themes.UseVsTheme="True"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/TextboxStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TextBox x:Name="textBox"
+                 Grid.Row="0"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="2"
+                 Margin="16"
+                 VerticalAlignment="Stretch"
+                 KeyUp="TextBox_KeyUp"
+                 Style="{StaticResource FileInputTextboxStyle}"
+                 Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" />
+    </Grid>
+</Window>

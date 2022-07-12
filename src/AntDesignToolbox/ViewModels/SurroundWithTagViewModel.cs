@@ -1,48 +1,54 @@
-﻿using AntDesignToolbox.Views;
-using EnvDTE;
-using Microsoft.VisualStudio.Threading;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Prism.Mvvm;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Prism.Commands;
+using EnvDTE;
 
-namespace AntDesignToolbox
+namespace AntDesignToolbox.ViewModels
 {
-    [Command(PackageGuids.AntDesignToolboxString, PackageIds.SurroundWithTagCommand)]
-    internal sealed class SurroundWithTagCommand : BaseCommand<SurroundWithTagCommand>
+    public class SurroundWithTagViewModel: BindableBase
     {
-        protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
+        public event EventHandler OnCreateSucceedEventHandler;
+        public DelegateCommand GenerateCommand { get; set; }
+
+        private string _text;
+        public string Text { get => _text; set => SetProperty(ref _text, value); }
+
+        public SurroundWithTagViewModel()
         {
-            //Execute();
-            await VS.Windows.ShowDialogAsync(new SurroundWithTagWindow());
+            GenerateCommand = new DelegateCommand(()=>ThreadHelper.JoinableTaskFactory.Run(GenerateAsync));
         }
 
-        protected override void BeforeQueryStatus(EventArgs e)
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            var activeDocument = AntDesignToolboxPackage.DTE.ActiveDocument.Object("TextDocument") as TextDocument;
-            var language = activeDocument.Language;
-            this.Command.Enabled = (language=="Razor");
-        }
 
-        private void Execute()
+        
+        public async Task GenerateAsync()
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             var activeDocument = AntDesignToolboxPackage.DTE.ActiveDocument.Object("TextDocument") as TextDocument;
+            
             TextSelection selection = activeDocument.Selection;
             var text = selection.Text;
             var lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             var newText = GetNewText(lines);
             selection.ReplaceText(text, newText);
+
+            OnCreateSucceedEventHandler?.Invoke(null, null);
         }
 
-        private Tuple<char,int> GetIndent(string[] lines)
+        private Tuple<char, int> GetIndent(string[] lines)
         {
             if (lines is null || lines.Length == 0) return new Tuple<char, int>(' ', 0);
-            string line = lines.FirstOrDefault(a=>a.Length>0);
-            if(line is null) return new Tuple<char, int>(' ', 0);
+            string line = lines.FirstOrDefault(a => a.Length > 0);
+            if (line is null) return new Tuple<char, int>(' ', 0);
             if (line.StartsWith("\t"))
             {
                 int count = 0;
-                foreach(char c in line)
+                foreach (char c in line)
                 {
                     if (c == '\t')
                     {
@@ -55,7 +61,7 @@ namespace AntDesignToolbox
                 }
                 return new Tuple<char, int>('\t', count);
             }
-            else if(line.StartsWith(" "))
+            else if (line.StartsWith(" "))
             {
                 int count = 0;
                 foreach (char c in line)
@@ -80,20 +86,20 @@ namespace AntDesignToolbox
             string indent = tuple.Item1 == ' ' ? "    " : "\t";
             string divIndent = new string(Enumerable.Repeat(tuple.Item1, tuple.Item2).ToArray());
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(divIndent + "<div>");
-            foreach(var line in lines)
+            builder.AppendLine(divIndent + $"<{Text}>");
+            foreach (var line in lines)
             {
                 if (line.Length == 0)
                 {
                     builder.AppendLine(line);
                 }
-                else{
+                else
+                {
                     builder.AppendLine(indent + line);
                 }
             }
-            builder.AppendLine(divIndent + "</div>");
+            builder.AppendLine(divIndent + $"</{Text}>");
             return builder.ToString();
         }
-
     }
 }
