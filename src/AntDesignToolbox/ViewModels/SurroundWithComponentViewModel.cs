@@ -1,39 +1,50 @@
-﻿using System;
+﻿using EnvDTE;
+using Prism.Commands;
+using Prism.Mvvm;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Prism.Mvvm;
-using Prism.Commands;
-using System.Collections.ObjectModel;
-using EnvDTE;
 
 namespace AntDesignToolbox.ViewModels
 {
-    internal class SurroundWithComponentViewModel: BindableBase
+    internal class SurroundWithComponentViewModel : BindableBase
     {
         public event EventHandler OnCreateSucceedEventHandler;
 
         private ComponentItem _selectedComponent;
-        public ComponentItem SelectedComponent { get => _selectedComponent; set => SetProperty(ref _selectedComponent, value); }
+        public ComponentItem SelectedComponent
+        {
+            get => _selectedComponent;
+            set
+            {
+                SetProperty(ref _selectedComponent, value);
+                ConfirmCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         private ObservableCollection<ComponentItem> _components;
         public ObservableCollection<ComponentItem> Components { get => _components; set => SetProperty(ref _components, value); }
 
-        public DelegateCommand ConfirmCommand { get; set; } 
+        public DelegateCommand ConfirmCommand { get; set; }
 
         public SurroundWithComponentViewModel()
         {
             InitializeComponents();
-            ConfirmCommand = new DelegateCommand(() => { ThreadHelper.JoinableTaskFactory.Run(GenerateAsync); });
+            ConfirmCommand = new DelegateCommand(() => { ThreadHelper.JoinableTaskFactory.Run(GenerateAsync); }, CanGenerate);
         }
 
         private void InitializeComponents()
         {
-            Components = new ObservableCollection<ComponentItem>()
+            var items = new List<ComponentItem>
             {
                 new ComponentItem{ ComponentName = "CascadingValue", OpenTag = "<CascadingValue TValue=\"object\">", CloseTag = "</CascadingValue>" },
+                new ComponentItem{ ComponentName = "ChildContent", OpenTag = "<ChildContent>", CloseTag = "</ChildContent>" },
+                new ComponentItem{ ComponentName = "Unbound", OpenTag = "<Unbound>", CloseTag = "</Unbound>" },
+                new ComponentItem{ ComponentName = "Popconfirm", OpenTag = @"<Popconfirm Title=""This is Title"" OkText=""Yes"" CancelText=""No"">", CloseTag = "</Popconfirm>" },
             };
+            var ordered = items.OrderBy(a => a.ComponentName);
+            Components = new ObservableCollection<ComponentItem>(ordered);
         }
 
         private bool CanGenerate()
@@ -119,12 +130,12 @@ namespace AntDesignToolbox.ViewModels
 
     }
 
-    internal class ComponentItem: BindableBase
+    internal class ComponentItem : BindableBase
     {
         private string _componentName;
         public string ComponentName { get => _componentName; set => SetProperty(ref _componentName, value); }
 
         public string OpenTag { get; set; }
-        public string CloseTag { get; set; } 
+        public string CloseTag { get; set; }
     }
 }
