@@ -124,7 +124,9 @@
 		<CommandPlacement guid="AntDesignToolbox" id="CreateCodeBehindCommand" priority="0x0100">
 			<Parent guid="AntDesignToolbox" id="ItemNodeContextMenuGroup"/>
 		</CommandPlacement>
-
+		<CommandPlacement guid="AntDesignToolbox" id="AddCrudPageCommand" priority="0x0100">
+			<Parent guid="AntDesignToolbox" id="ItemNodeContextMenuGroup"/>
+		</CommandPlacement>
 	</CommandPlacements>
 
 	<KeyBindings>
