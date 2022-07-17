@@ -8,6 +8,7 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
 	public class ClassViewModel : BindableBase
 	{
         public string FilePath { get; set; }
+
         private string _className;
         public string ClassName { get => _className; set => SetProperty(ref _className, value); }
         public string ClassFullName { get; set; }

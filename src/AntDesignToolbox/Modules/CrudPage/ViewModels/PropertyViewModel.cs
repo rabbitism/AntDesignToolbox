@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Prism.Mvvm;
 
 namespace AntDesignToolbox.Modules.CrudPage.ViewModels
@@ -14,5 +15,7 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
 
         private string _propertyType;
         public string PropertyType { get => _propertyType; set => SetProperty(ref _propertyType, value); } 
+
+        public IPropertySymbol PropertySymbol { get; set; }
     }
 }

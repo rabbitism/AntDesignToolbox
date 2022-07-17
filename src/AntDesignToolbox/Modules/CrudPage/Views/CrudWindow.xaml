@@ -2,8 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:imaging="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.Imaging"
         xmlns:local="clr-namespace:AntDesignToolbox.Modules.CrudPage.Views"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:moniker="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.ImageCatalog"
         xmlns:toolkit="clr-namespace:Community.VisualStudio.Toolkit;assembly=Community.VisualStudio.Toolkit"
         xmlns:vm="clr-namespace:AntDesignToolbox.Modules.CrudPage.ViewModels"
         Title="Create CRUD Page"
@@ -13,6 +15,11 @@
         toolkit:Themes.UseVsTheme="True"
         SizeToContent="Height"
         mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -43,7 +50,14 @@
                     </TreeView.ItemContainerStyle>
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate DataType="{x:Type vm:PropertyCollectionViewModel}" ItemsSource="{Binding Properties}">
-                            <Label Padding="4,2" Content="{Binding ClassName}" />
+                            <StackPanel Orientation="Horizontal">
+                                <imaging:CrispImage MinWidth="16"
+                                                    MinHeight="16"
+                                                    Margin="0,0,5,0"
+                                                    Moniker="{x:Static moniker:KnownMonikers.AbstractClass}"
+                                                    Visibility="{Binding IsBaseClass, Converter={StaticResource BooleanToVisibility}}" />
+                                <Label Padding="4,2" Content="{Binding ClassName}" />
+                            </StackPanel>
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

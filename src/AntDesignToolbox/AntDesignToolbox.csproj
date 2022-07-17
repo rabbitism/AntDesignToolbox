@@ -61,6 +61,7 @@
     <Compile Include="Commons\ViewModelHelper.cs" />
     <Compile Include="Commons\XmlHelpers.cs" />
     <Compile Include="Converters\BooleanToHiddenConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Modules\CrudPage\ViewModels\ClassViewModel.cs" />
     <Compile Include="Modules\CrudPage\ViewModels\CrudViewModel.cs" />

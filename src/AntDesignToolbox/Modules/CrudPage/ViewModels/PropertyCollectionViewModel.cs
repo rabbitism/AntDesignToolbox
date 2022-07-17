@@ -14,6 +14,9 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
         private ObservableCollection<PropertyViewModel> _properties;
         public ObservableCollection<PropertyViewModel> Properties { get => _properties; set => SetProperty(ref _properties, value); }
 
+        private bool _isBaseClass;
+        public bool IsBaseClass { get => _isBaseClass; set => SetProperty(ref _isBaseClass, value); } 
+
         public PropertyCollectionViewModel()
         {
             Properties = new ObservableCollection<PropertyViewModel>();

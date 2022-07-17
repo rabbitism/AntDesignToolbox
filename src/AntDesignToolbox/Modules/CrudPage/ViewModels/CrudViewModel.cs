@@ -17,12 +17,14 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
         public ObservableCollection<ClassViewModel> ClassViewModels { get => _classViewModels; set => SetProperty(ref _classViewModels, value); }
 
         private ClassViewModel _selectedClassViewModel;
-        public ClassViewModel SelectedClassViewModel { 
+        public ClassViewModel SelectedClassViewModel
+        {
             get => _selectedClassViewModel;
-            set {
+            set
+            {
                 SetProperty(ref _selectedClassViewModel, value);
                 UpdateClassHierarchy(value);
-            } 
+            }
         }
 
         private ObservableCollection<PropertyCollectionViewModel> _hierarchy;
@@ -37,6 +39,10 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
 
         }
 
+        /// <summary>
+        /// Command can only be invoked when there is exactly one solution item selected. So only consider the first selected solution item. 
+        /// </summary>
+        /// <returns></returns>
         private async Task InitializeAsync()
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -50,51 +56,21 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
             if (item.Type == SolutionItemType.PhysicalFolder)
             {
                 // Right click on a folder, use this folder as Page output path, and load all class models in this solution
-                await InitializeAllClassViewModels();
-                await InitializeFolder(item);
+                await InitializeAllClassViewModelsAsync();
+                await InitializeFolderAsync(item);
             }
             else if (item.Type == SolutionItemType.PhysicalFile)
             {
                 // Right click on a file, use this file as class models, and load all physical folders. 
-                await InitializeClassViewModels(item);
-                await InitializeAllFolders();
+                await InitializeClassViewModelsAsync(item);
+                await InitializeAllFoldersAsync();
             }
 
             var path = solutionItems.First().FullPath;
             var document = space.CurrentSolution.Projects.First().Documents.FirstOrDefault(a => a.FilePath == path);
-
-
-
-            //SemanticModel model = await document.GetSemanticModelAsync();
-            //SyntaxTree tree = model.SyntaxTree;
-
-            //CompilationUnitSyntax root = tree.GetCompilationUnitRoot();
-
-            //ClassDeclarationSyntax c = root.DescendantNodes().OfType<ClassDeclarationSyntax>().Single();
-
-            //var classSymbol = model.GetDeclaredSymbol(c) as ITypeSymbol;
-
-
-            //var baseT = classSymbol.BaseType;
-
-            //var members = classSymbol.GetMembers();
-
-            //var baseMembers = baseT.GetMembers();
-
-            //var base2 = baseT.BaseType;
-            //var base2members= base2.GetMembers();
-
-            //foreach(var member in base2members)
-            //{
-            //    if(member.Kind== SymbolKind.Property)
-            //    {
-            //        IPropertySymbol s = member as IPropertySymbol;
-
-            //    }
-            //}
         }
 
-        private async Task InitializeAllClassViewModels()
+        private async Task InitializeAllClassViewModelsAsync()
         {
             var documents = _workspace.CurrentSolution.Projects.SelectMany(a => a.Documents);
             foreach (var document in documents)
@@ -133,17 +109,17 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
             }
         }
 
-        private async Task InitializeClassViewModels(SolutionItem item)
+        private async Task InitializeClassViewModelsAsync(SolutionItem item)
         {
 
         }
 
-        private async Task InitializeAllFolders()
+        private async Task InitializeAllFoldersAsync()
         {
 
         }
 
-        private async Task InitializeFolder(SolutionItem item)
+        private async Task InitializeFolderAsync(SolutionItem item)
         {
 
         }
@@ -154,19 +130,24 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
             //var semanticModel = await vm.Document.GetSemanticModelAsync();
             //CompilationUnitSyntax root = semanticModel.SyntaxTree.GetCompilationUnitRoot();
             var symbol = vm.ClassSymbol;
-            while(symbol != null)
+            var isBase = false;
+            while (symbol != null)
             {
-                PropertyCollectionViewModel collection = new PropertyCollectionViewModel();
-                collection.ClassName = symbol.Name;
+                PropertyCollectionViewModel collection = new()
+                {
+                    ClassName = symbol.Name,
+                    IsBaseClass = isBase,
+                };
                 IEnumerable<ISymbol> members = symbol.GetMembers().Where(a => a.Kind == SymbolKind.Property && a.DeclaredAccessibility == Accessibility.Public);
                 foreach (var member in members)
                 {
-                    if(member is IPropertySymbol ps)
+                    if (member is IPropertySymbol ps)
                     {
                         collection.Properties.Add(new PropertyViewModel()
                         {
                             PropertyName = ps.Name,
                             PropertyType = ps.Type.ToDisplayString(),
+                            PropertySymbol = ps,
                         });
                     }
                 }
@@ -175,6 +156,7 @@ namespace AntDesignToolbox.Modules.CrudPage.ViewModels
                     Hierarchy.Add(collection);
                 }
                 symbol = symbol.BaseType;
+                isBase = true;
             }
         }
     }
